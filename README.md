@@ -80,7 +80,7 @@ A proposta inclui futuras integrações com outros fatores que influenciam a ava
 
 Segue abaixo o modelo conceitual do projeto, representado por um diagrama de entidade relacionamento
 
-![]()
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_conceitual.PNG)
 
 
 
