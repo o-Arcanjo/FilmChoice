@@ -14,7 +14,7 @@ public class Ator {
     private Long id;
 
     @Column(name="Nome")
-    private String nome;
+    private String Nome;
 
     @Temporal(TemporalType.DATE)
     @Column(name="Data_Nascimento", updatable=false)
@@ -23,24 +23,27 @@ public class Ator {
     // Construtor padrão
     public Ator() {}
 
+    // Construtor completo
+    public Ator(String nome, Date dataNascimento) {
+        this.Nome = nome;
+        this.dataNascimento = dataNascimento;
+    }
+
     // Getters e Setters
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
-        return nome;
+        return Nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.Nome = nome;
     }
 
     public Date getDataNascimento() {
         return dataNascimento;
     }
 }
+
