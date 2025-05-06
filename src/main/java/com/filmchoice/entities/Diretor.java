@@ -2,83 +2,44 @@ package com.filmchoice.entities;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "Diretor")
 @Access(AccessType.FIELD)
-@SequenceGenerator(name = "jpa_diretor_seq", sequenceName = "diretor_id_seq")
 public class Diretor {
-
     @Id
     @GeneratedValue(generator = "jpa_diretor_seq")
+    @SequenceGenerator(name = "jpa_diretor_seq", sequenceName = "diretor_id_seq")
     private Long id;
 
-    @Column(name = "Nome", nullable = false)
-    private String nome;
+    @Column(name = "Nome", nullable = false, updatable=true)
+    private String Nome;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "Data_Nascimento", nullable = false)
-    private Date dataNascimento;
+    @Column(name = "Data_Nascimento", nullable = false, updatable=false)
+    private Date Data_Nascimento;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idNacionalidade")
-    private Nacionalidade nacionalidade;
+    public Diretor(){};
 
-    @ManyToMany
-    @JoinTable(
-            name = "dirige",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id")
-    )
-    private List<Filme> filmes;
-
-    public Diretor() {
-    }
-
-    public Diretor(String nome, Date dataNascimento, Nacionalidade nacionalidade) {
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.nacionalidade = nacionalidade;
+    public  Diretor(String Nome, Date Data_Nascimento) {
+        this.Nome = Nome;
+        this.Data_Nascimento = Data_Nascimento;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+        return Nome;
     }
 
     public Date getDataNascimento() {
-        return dataNascimento;
+        return Data_Nascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setNome(String Nome) {
+        this.Nome = Nome;
     }
 
-    public Nacionalidade getNacionalidade() {
-        return nacionalidade;
-    }
-
-    public void setNacionalidade(Nacionalidade nacionalidade) {
-        this.nacionalidade = nacionalidade;
-    }
-
-    public List<Filme> getFilmes() {
-        return filmes;
-    }
-
-    public void setFilmes(List<Filme> filmes) {
-        this.filmes = filmes;
-    }
 }
