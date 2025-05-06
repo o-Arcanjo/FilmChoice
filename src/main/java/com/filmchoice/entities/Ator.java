@@ -2,11 +2,12 @@ package com.filmchoice.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
+
 
 @Entity
 @Table(name="Ator")
-@Access(AccessType.FIELD)
 public class Ator {
     @Id
     @GeneratedValue(generator="jpa_ator_seq")
@@ -14,36 +15,64 @@ public class Ator {
     private Long id;
 
     @Column(name="Nome")
-    private String Nome;
+    private String nome;
 
-    @Temporal(TemporalType.DATE)
+
     @Column(name="Data_Nascimento", updatable=false)
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
-    // Construtor padrão
     public Ator() {}
 
-    // Construtor completo
-    public Ator(String nome, Date dataNascimento) {
-        this.Nome = nome;
+    public Ator(String nome, LocalDate dataNascimento) {
+        this.nome = nome;
         this.dataNascimento = dataNascimento;
     }
 
-    // Getters e Setters
+
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        this.Nome = nome;
+        this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ator ator = (Ator) o;
+        return id != null && Objects.equals(id, ator.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Ator{" +
+                "id=" + id +
+                ", Nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                '}';
     }
 }
 

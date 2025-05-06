@@ -5,24 +5,23 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="Avaliacao")
-@Access(AccessType.FIELD)
 public class Avaliacao {
     @Id
     @GeneratedValue(generator = "jpa_avaliacao_seq")
     @SequenceGenerator(name = "jpa_avaliacao_seq", sequenceName = "avaliacao_id_seq")
     private Long id;
 
-    @Column(name="Nota", nullable=false, updatable=true)
-    private int Nota;
+    @Column(name="Nota", nullable=false)
+    private Integer nota;
 
     @Lob
-    @Column(name="Comentario", nullable=false, updatable=true)
-    private String Comentario;
+    @Column(name="Comentario", nullable=false)
+    private String comentario;
 
     public Avaliacao(){}
-    public Avaliacao(int Nota, String Comentario){
-        this.Nota = Nota;
-        this.Comentario = Comentario;
+    public Avaliacao(Integer nota, String comentario){
+        this.nota = nota;
+        this.comentario = comentario;
     }
 
     public Long getId(){
@@ -30,19 +29,19 @@ public class Avaliacao {
     }
 
     public int getNota(){
-        return Nota;
+        return nota;
     }
 
     public String getComentario(){
-        return Comentario;
+        return comentario;
     }
 
-    public void setNota(int Nota){
-        this.Nota = Nota;
+    public void setNota(int nota){
+        this.nota = nota;
     }
 
-    public void setComentario(String Comentario){
-        this.Comentario = Comentario;
+    public void setComentario(String comentario){
+        this.comentario = comentario;
     }
 
 
@@ -51,7 +50,7 @@ public class Avaliacao {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         Avaliacao avaliacao = (Avaliacao) o;
-        return id != null && id.equals(avaliacao.id);
+        return id != null && Objects.equals(id, avaliacao.id);
     }
 
     @Override
@@ -63,8 +62,8 @@ public class Avaliacao {
     public String toString(){
         return "Avaliacao{ " +
                 "id= " + id + 
-                "Nota= " + Nota +
-                "Comentario= " + Comentario + 
+                "Nota= " + nota +
+                "Comentario= " + comentario +
                 " }"; 
     }
 }

@@ -1,11 +1,10 @@
 package com.filmchoice.entities;
-
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Idioma")
-@Access(AccessType.FIELD)
 public class Idioma {
 
     @Id
@@ -16,26 +15,46 @@ public class Idioma {
     @Column(name = "Tipo", nullable = false)
     private String tipo;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "Data_Criacao_Tipo", nullable = false)
-    private Date dataCriacaoTipo;
-
-    @Column(name = "Principal")
-    private Boolean principal;
+    public Idioma(){};
+    public Idioma(Long id, String tipo) {
+        this.id = id;
+        this.tipo = tipo;
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public Date getDataCriacaoTipo() {
-        return dataCriacaoTipo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public Boolean getPrincipal() {
-        return principal;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Idioma idioma = (Idioma) o;
+        return Objects.equals(id, idioma.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Idioma{" +
+                "id=" + id +
+                ", tipo='" + tipo + '\'' +
+                '}';
     }
 }
