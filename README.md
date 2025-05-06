@@ -80,7 +80,7 @@ A proposta inclui futuras integrações com outros fatores que influenciam a ava
 
 Segue abaixo o modelo conceitual do projeto, representado por um diagrama de entidade relacionamento
 
-![]()
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_conceitual.PNG)
 
 
 
@@ -89,5 +89,5 @@ Segue abaixo o modelo conceitual do projeto, representado por um diagrama de ent
 
 Segue abaixo o modelo lógico do projeto, representado por um diagrama de entidade relacionamento
 
-![]()
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_logico.PNG)
 ---
