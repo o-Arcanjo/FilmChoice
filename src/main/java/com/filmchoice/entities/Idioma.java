@@ -16,8 +16,7 @@ public class Idioma {
     private String tipo;
 
     public Idioma(){};
-    public Idioma(Long id, String tipo) {
-        this.id = id;
+    public Idioma(String tipo) {
         this.tipo = tipo;
     }
 

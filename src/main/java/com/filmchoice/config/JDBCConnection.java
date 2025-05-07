@@ -6,13 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.filmchoice.util.ConfigVariavel;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.filmchoice.util.LoadPropertiesBd;
-import com.filmchoice.util.TipoConexao;
+import com.filmchoice.enums.TipoConexao;
 
 public final class JDBCConnection implements IManagerConnection {
     private static volatile JDBCConnection instance;

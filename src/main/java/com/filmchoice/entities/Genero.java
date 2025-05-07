@@ -12,7 +12,7 @@ public class Genero {
     @SequenceGenerator(name = "jpa_genero_seq", sequenceName = "genero_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "Tipo", nullable = false, length = 50)
+    @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
 
     public Genero() {}

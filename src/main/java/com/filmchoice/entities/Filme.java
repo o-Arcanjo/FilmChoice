@@ -2,6 +2,7 @@ package com.filmchoice.entities;
 import java.util.*;
 import jakarta.persistence.*;
 import java.math.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="Filme")
@@ -14,17 +15,17 @@ public class Filme {
     @Column(name="titulo", nullable=false)
     private String titulo;
     @Column(name="lancamento", updatable=false, nullable=false)
-    private Date lancamento;
+    private LocalDateTime lancamento;
 
     @Column(name="duracaoMinutos", updatable=false, nullable=false)
-    private int duracaoMinutos;
+    private Integer duracaoMinutos;
 
     @Column(name="receita", precision=14, scale=2)
     private BigDecimal receita;
 
     public Filme(){};
 
-    public Filme(String titulo, Date lancamento, int duracaoMinutos, BigDecimal receita) {
+    public Filme(String titulo, LocalDateTime lancamento, Integer duracaoMinutos, BigDecimal receita) {
         this.titulo = titulo;
         this.lancamento = lancamento;
         this.duracaoMinutos = duracaoMinutos;
@@ -47,19 +48,19 @@ public class Filme {
         this.titulo = titulo;
     }
 
-    public Date getLancamento() {
+    public LocalDateTime getLancamento() {
         return lancamento;
     }
 
-    public void setLancamento(Date lancamento) {
+    public void setLancamento(LocalDateTime lancamento) {
         this.lancamento = lancamento;
     }
 
-    public int getDuracaoMinutos() {
+    public Integer getDuracaoMinutos() {
         return duracaoMinutos;
     }
 
-    public void setDuracaoMinutos(int duracaoMinutos) {
+    public void setDuracaoMinutos(Integer duracaoMinutos) {
         this.duracaoMinutos = duracaoMinutos;
     }
 
@@ -80,7 +81,7 @@ public class Filme {
     }
 
     @Override
-    public int hashCode(){
+    public Integer hashCode(){
         return Objects.hash(id);
     }
 

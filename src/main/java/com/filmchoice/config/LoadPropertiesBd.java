@@ -1,6 +1,9 @@
-package com.filmchoice.util;
+package com.filmchoice.config;
 import java.io.InputStream;
 import java.util.Properties;
+
+import com.filmchoice.enums.TipoConexao;
+
 import java.io.IOException;
 
 public final class LoadPropertiesBd{

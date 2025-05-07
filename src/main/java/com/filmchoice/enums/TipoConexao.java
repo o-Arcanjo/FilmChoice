@@ -1,4 +1,4 @@
-package com.filmchoice.util;
+package com.filmchoice.enums;
 
 public enum TipoConexao {
     JDBC("JDBC", "JDBC.properties"),

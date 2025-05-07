@@ -1,31 +1,22 @@
 package com.filmchoice.util;
 
-import java.time.LocalDate;
-
-import com.filmchoice.entities.Ator;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
-public class MainAtorSave {
-
+public class MainFilmeDeleteAll {
+    
     public static void main(String[] args) {
         try (EntityManagerFactory emf = Persistence.createEntityManagerFactory("daw");
              EntityManager em = emf.createEntityManager()) {
 
-            // Criar uma nova instância de Ator
-            Ator ator = new Ator("Nome do Ator", LocalDate.of(1980, 1, 1));
-            // Iniciar uma transação
             EntityTransaction tx = em.getTransaction();
             tx.begin();
 
-            // Salvar a entidade no banco de dados
-            em.persist(ator);
-            System.out.println("Ator salvo: " + ator);
+            int deletedCount = em.createQuery("DELETE FROM Filme").executeUpdate();
+            System.out.println("Total de registros deletados da tabela Filme: " + deletedCount);
 
-            // Comitar a transação
             tx.commit();
         }
     }

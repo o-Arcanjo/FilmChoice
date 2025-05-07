@@ -1,9 +1,10 @@
 package com.filmchoice.entities;
-import com.filmchoice.util.Papel;
 import jakarta.persistence.*;
 import java.time.*;
 
 import java.util.Objects;
+
+import com.filmchoice.enums.Papel;
 
 @Entity
 @Table(name="Usuario", uniqueConstraints={
@@ -42,6 +43,17 @@ public class Usuario {
         return id != null && id.equals(usuario.id);
     }
 
+
+    public Usuario(){}
+    
+    public Usuario(String nome, String senhaHash, String email, Papel papel) {
+        this.nome = nome;
+        this.senha = senhaHash;
+        this.email = email;
+        this.papel = papel;
+        this.dataCriacao = LocalDate.now();
+    }
+    
     @Override
     public int hashCode(){
         return Objects.hash(id);
@@ -113,4 +125,6 @@ public class Usuario {
                 "Email= " + email +
                 " }"; 
     }
+
+
 }
