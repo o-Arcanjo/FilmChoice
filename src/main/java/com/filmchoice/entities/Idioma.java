@@ -12,7 +12,7 @@ public class Idioma {
     @SequenceGenerator(name = "jpa_idioma_seq", sequenceName = "idioma_id_seq")
     private Long id;
 
-    @Column(name = "Tipo", nullable = false)
+    @Column(name = "tipo", nullable = false)
     private String tipo;
 
     public Idioma(){};
@@ -42,7 +42,7 @@ public class Idioma {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Idioma idioma = (Idioma) o;
-        return Objects.equals(id, idioma.id);
+        return id != null && Objects.equals(id, idioma.id);
     }
 
     @Override

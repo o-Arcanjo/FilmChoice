@@ -4,11 +4,17 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+
 import com.filmchoice.util.ConfigVariavel;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class JDBCConnection {
+import com.filmchoice.util.LoadPropertiesBd;
+import com.filmchoice.util.TipoConexao;
+
+public final class JDBCConnection implements IManagerConnection {
     private static volatile JDBCConnection instance;
     private final Connection connection;
     private static final Logger logger = LoggerFactory.getLogger(JDBCConnection.class);
@@ -26,15 +32,39 @@ public final class JDBCConnection {
         }
     }
 
-    public static JDBCConnection getInstance() throws SQLException, IOException{
-        return ManagerConnection.createSingleton(instance, JDBCConnection::new, TipoConexao.JDBC);
+    public static JDBCConnection getInstance() throws SQLException, IOException {
+        if (instance == null) {
+            synchronized (JDBCConnection.class) {
+                if (instance == null) {
+                    Properties props = LoadPropertiesBd.loadProperties(TipoConexao.JDBC);  
+                    ConfigVariavel config = getInstanceConfigVariavel(props);
+                    instance = new JDBCConnection(config);
+                }
+            }
+        }
+        return instance;
+    }
+    
+    public static ConfigVariavel getInstanceConfigVariavel(Properties props){
+        String dbUrl = props.getProperty("DB_URL_JDBC");
+        String dbUser = props.getProperty("DB_USER_JDBC");
+        String dbSenha = props.getProperty("DB_PASSWORD_JDBC");
+        return new ConfigVariavel
+            .Builder()
+            .url(dbUrl)
+            .user(dbUser)
+            .senha(dbSenha)
+            .build();
     }
 
-    public Connection getConnection() {
-        return connection;
+
+    @Override
+    public void conectar(){
+        
     }
 
-    public void close() {
+    @Override
+    public void desconectar() {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();

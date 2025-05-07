@@ -11,11 +11,11 @@ public class Avaliacao {
     @SequenceGenerator(name = "jpa_avaliacao_seq", sequenceName = "avaliacao_id_seq")
     private Long id;
 
-    @Column(name="Nota", nullable=false)
+    @Column(name="nota", nullable=false)
     private Integer nota;
 
     @Lob
-    @Column(name="Comentario", nullable=false)
+    @Column(name="comentario", nullable=false)
     private String comentario;
 
     public Avaliacao(){}

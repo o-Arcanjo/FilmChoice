@@ -11,15 +11,15 @@ public class Filme {
     @SequenceGenerator(name="jpa_filme_seq", sequenceName="filme_id_seq")
     private Long id;
 
-    @Column(name="Titulo", nullable=false)
+    @Column(name="titulo", nullable=false)
     private String titulo;
-    @Column(name="Lancamento", updatable=false, nullable=false)
+    @Column(name="lancamento", updatable=false, nullable=false)
     private Date lancamento;
 
-    @Column(name="Duracao_Minutos", updatable=false, nullable=false)
+    @Column(name="duracaoMinutos", updatable=false, nullable=false)
     private int duracaoMinutos;
 
-    @Column(name="Receita", precision=14, scale=2)
+    @Column(name="receita", precision=14, scale=2)
     private BigDecimal receita;
 
     public Filme(){};

@@ -1,8 +1,9 @@
 package com.filmchoice.entities;
 import com.filmchoice.util.Papel;
 import jakarta.persistence.*;
-import java.util.*;
+import java.time.*;
 
+import java.util.Objects;
 
 @Entity
 @Table(name="Usuario", uniqueConstraints={
@@ -14,20 +15,22 @@ public class Usuario {
     @SequenceGenerator(name="jpa_usuario_seq", sequenceName="usuario_id_seq")
     private Long id;
 
-    @Column(name="Nome", nullable=false)
+    @Column(name="nome", nullable=false)
     private String nome;
 
-    @Column(name="Senha", nullable=false)
+    @Column(name="senha", nullable=false)
     private String senha;
 
-    @Column(name="Data_Criacao", nullable=false, updatable=false)
-    private Date dataCriacao;
+    @Column(name="dataCriacao", nullable=false, updatable=false)
+    private LocalDate dataCriacao;
 
-    @Column(name="Email", nullable=false)
+    @Column(name="email", nullable=false)
     private String email;
 
-    @Column(name="Papel", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name="papel", nullable = false)
     private Papel papel;
+
     @Transient
     private Integer idade;
     
@@ -68,11 +71,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Date getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Date dataCriacao) {
+    public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 

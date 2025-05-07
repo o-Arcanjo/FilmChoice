@@ -12,17 +12,14 @@ public class Genero_Cinematografico {
     @SequenceGenerator(name = "jpa_genero_seq", sequenceName = "genero_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "Tipo", nullable = false, length = 50)
+    @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
-
-    @Column(name = "Data_Criacao_Tipo")
-    private LocalDate dataCriacaoTipo;
 
     public Genero_Cinematografico() {}
 
-    public Genero_Cinematografico(String tipo, LocalDate dataCriacaoTipo) {
+    public Genero_Cinematografico(Long id,String tipo) {
+        this.id = id;
         this.tipo = tipo;
-        this.dataCriacaoTipo = dataCriacaoTipo;
     }
 
     public Long getId() {
@@ -39,14 +36,6 @@ public class Genero_Cinematografico {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    }
-
-    public LocalDate getDataCriacaoTipo() {
-        return dataCriacaoTipo;
-    }
-
-    public void setDataCriacaoTipo(LocalDate dataCriacaoTipo) {
-        this.dataCriacaoTipo = dataCriacaoTipo;
     }
 
     @Override
@@ -67,7 +56,6 @@ public class Genero_Cinematografico {
         return "Genero_Cinematografico{" +
                 "id=" + id +
                 ", tipoGenero='" + tipo + '\'' +
-                ", dataCriacaoTipo=" + dataCriacaoTipo +
                 '}';
     }
 }

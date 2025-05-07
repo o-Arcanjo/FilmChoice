@@ -14,10 +14,10 @@ public class Pais {
     @SequenceGenerator(name = "jpa_pais_seq", sequenceName = "pais_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "Nome", nullable = false, length = 60)
+    @Column(name = "nome", nullable = false, length = 60)
     private String nome;
 
-    @Column(name = "Sigla", length = 10)
+    @Column(name = "sigla", length = 10)
     private String sigla;
 
     public Pais() {}

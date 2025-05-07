@@ -14,11 +14,11 @@ public class Diretor {
     @SequenceGenerator(name = "jpa_diretor_seq", sequenceName = "diretor_id_seq")
     private Long id;
 
-    @Column(name = "Nome", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
 
-    @Column(name = "Data_Nascimento", nullable = false, updatable=false)
+    @Column(name = "dataNascimento", nullable = false, updatable=false)
     private LocalDate dataNascimento;
 
     public Diretor(){};

@@ -14,11 +14,11 @@ public class Ator {
     @SequenceGenerator(name="jpa_ator_seq", sequenceName="ator_id_seq")
     private Long id;
 
-    @Column(name="Nome")
+    @Column(name="nome")
     private String nome;
 
 
-    @Column(name="Data_Nascimento", updatable=false)
+    @Column(name="dataNascimento", updatable=false)
     private LocalDate dataNascimento;
 
     public Ator() {}
@@ -70,7 +70,7 @@ public class Ator {
     public String toString() {
         return "Ator{" +
                 "id=" + id +
-                ", Nome='" + nome + '\'' +
+                ", nome='" + nome + '\'' +
                 ", dataNascimento=" + dataNascimento +
                 '}';
     }
