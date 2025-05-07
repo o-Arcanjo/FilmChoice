@@ -5,11 +5,10 @@ import java.io.IOException;
 
 public final class LoadPropertiesBd{
     private LoadPropertiesBd(){};
-    private static final String CONFIG_FILE = "/config.properties";
-
-    public static Properties loadProperties() throws IOException {
+    public static Properties loadProperties(TipoConexao conexao) throws IOException {
         Properties props = new Properties();
-       try(InputStream input = LoadPropertiesBd.class.getResourceAsStream(CONFIG_FILE)){
+        String path = conexao.getArquivoProperties();
+       try(InputStream input = LoadPropertiesBd.class.getResourceAsStream(path)){
             if(input == null){
                 throw new IOException("Arquivo config.properties não encontrado!");
             }

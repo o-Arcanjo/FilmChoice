@@ -80,99 +80,14 @@ A proposta inclui futuras integrações com outros fatores que influenciam a ava
 
 Segue abaixo o modelo conceitual do projeto, representado por um diagrama de entidade relacionamento
 
-```mermaid
-erDiagram
-  Ator {
-    uuid id PK
-    varchar nome
-    date data_nascimento
-  }
-
-  Diretor {
-    uuid id PK
-    varchar nome
-    date data_nascimento
-  }
-
-  Dirige {
-    uuid filme_id FK
-    uuid diretor_id FK
-  }
-
-  Filme {
-    uuid id PK
-    varchar titulo
-    date lancamento
-    numeric receita
-    int duracao_minuto
-  }
-
-  Genero {
-    serial id PK
-    varchar tipo_genero
-    date data_criacao
-  }
-
-  Idioma {
-    serial id PK
-    varchar tipo_idioma
-    date data_criacao
-  }
-
-  Avaliacao {
-    serial id PK
-    numeric nota
-    text comentario
-  }
-
-  Usuario {
-    uuid id PK
-    varchar nome
-    date data_criacao
-    char senha
-  }
-
-  Papel {
-    serial id PK
-    text descricao
-    varchar valor
-  }
-
-  Atua {
-    uuid filme_id FK
-    uuid ator_id FK
-  }
-
-  Nacionalidade {
-    serial id
-    varchar sigla
-    date data_criacao
-    varchar nome 
-  }
-
-  Filme_Genero {
-    uuid filme_id FK 
-    int genero_id FK 
-  }
-
-  Filme_Idioma {
-     uuid filme_id FK 
-     int idioma_id FK 
-     boolean principal
-  }
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_conceitual.PNG)
 
 
-%% Relacionamentos
-  Ator ||--o{ Atua : interpreta
-  Filme ||--o{ Atua : tem
-  Filme ||--o{ Genero : tem
-  Filme ||--o{ Idioma : éFaladoEm
-  Filme ||--o{ Avaliacao : recebe
-  Usuario ||--o{ Avaliacao : faz
-  Diretor ||--o{ Filme : dirige
-  Filme_Genero ||--|{ Filme : pertenceA
-  Filme_Genero ||--|{ Genero : inclui
-  Filme_Idioma ||--|{ Filme : temIdioma
-  Filme_Idioma ||--|{ Idioma : incluiIdioma
-```
+
+## 🏗 Modelo Lógico
+
+
+Segue abaixo o modelo lógico do projeto, representado por um diagrama de entidade relacionamento
+
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_logico.PNG)
 ---

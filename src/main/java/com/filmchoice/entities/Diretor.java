@@ -1,45 +1,31 @@
 package com.filmchoice.entities;
 
 import jakarta.persistence.*;
-import java.util.Date;
-import java.util.List;
+
+import java.time.LocalDate;
+import java.util.Objects;
+
 
 @Entity
 @Table(name = "Diretor")
-@Access(AccessType.FIELD)
-@SequenceGenerator(name = "jpa_diretor_seq", sequenceName = "diretor_id_seq")
 public class Diretor {
-
     @Id
     @GeneratedValue(generator = "jpa_diretor_seq")
+    @SequenceGenerator(name = "jpa_diretor_seq", sequenceName = "diretor_id_seq")
     private Long id;
 
-    @Column(name = "Nome", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "Data_Nascimento", nullable = false)
-    private Date dataNascimento;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idNacionalidade")
-    private Nacionalidade nacionalidade;
+    @Column(name = "dataNascimento", nullable = false, updatable=false)
+    private LocalDate dataNascimento;
 
-    @ManyToMany
-    @JoinTable(
-            name = "dirige",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id")
-    )
-    private List<Filme> filmes;
+    public Diretor(){};
 
-    public Diretor() {
-    }
-
-    public Diretor(String nome, Date dataNascimento, Nacionalidade nacionalidade) {
+    public  Diretor(String nome, LocalDate dataNascimento) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.nacionalidade = nacionalidade;
     }
 
     public Long getId() {
@@ -58,27 +44,22 @@ public class Diretor {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
-    public Nacionalidade getNacionalidade() {
-        return nacionalidade;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Diretor diretor = (Diretor) o;
+        return id != null && Objects.equals(id, diretor.id);
     }
-
-    public void setNacionalidade(Nacionalidade nacionalidade) {
-        this.nacionalidade = nacionalidade;
-    }
-
-    public List<Filme> getFilmes() {
-        return filmes;
-    }
-
-    public void setFilmes(List<Filme> filmes) {
-        this.filmes = filmes;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

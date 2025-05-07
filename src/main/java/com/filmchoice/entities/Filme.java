@@ -1,32 +1,97 @@
 package com.filmchoice.entities;
-import java.util.Date;
-
-import jakarta.persistence.Access;
-import jakarta.persistence.AccessType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-
+import java.util.*;
+import jakarta.persistence.*;
+import java.math.*;
 
 @Entity
 @Table(name="Filme")
-@Access(AccessType.FIELD)
 public class Filme {
     @Id
     @GeneratedValue(generator="jpa_filme_seq")
     @SequenceGenerator(name="jpa_filme_seq", sequenceName="filme_id_seq")
     private Long id;
 
-    @Column(name="Titulo")
-    private String Titulo;
+    @Column(name="titulo", nullable=false)
+    private String titulo;
+    @Column(name="lancamento", updatable=false, nullable=false)
+    private Date lancamento;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="Lancamento", updatable=false)
-    private Date Lancamento;
+    @Column(name="duracaoMinutos", updatable=false, nullable=false)
+    private int duracaoMinutos;
 
+    @Column(name="receita", precision=14, scale=2)
+    private BigDecimal receita;
+
+    public Filme(){};
+
+    public Filme(String titulo, Date lancamento, int duracaoMinutos, BigDecimal receita) {
+        this.titulo = titulo;
+        this.lancamento = lancamento;
+        this.duracaoMinutos = duracaoMinutos;
+        this.receita = receita;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Date getLancamento() {
+        return lancamento;
+    }
+
+    public void setLancamento(Date lancamento) {
+        this.lancamento = lancamento;
+    }
+
+    public int getDuracaoMinutos() {
+        return duracaoMinutos;
+    }
+
+    public void setDuracaoMinutos(int duracaoMinutos) {
+        this.duracaoMinutos = duracaoMinutos;
+    }
+
+    public BigDecimal getReceita() {
+        return receita;
+    }
+
+    public void setReceita(BigDecimal receita) {
+        this.receita = receita;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Filme filme = (Filme) o;
+        return id != null && id.equals(filme.id);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString(){
+        return "Filme{ " +
+                "id= " + id + 
+                "Titulo= " + titulo +
+                "Lancamento= " + lancamento +
+                "Duracao_Minutos= " + duracaoMinutos +
+                "Receita= " + receita +
+                " }"; 
+    }
 }

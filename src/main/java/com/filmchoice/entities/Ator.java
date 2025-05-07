@@ -1,34 +1,34 @@
 package com.filmchoice.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-@Table(name = "Ator")
-public class Ator {
 
+@Entity
+@Table(name="Ator")
+public class Ator {
     @Id
-    @GeneratedValue(generator = "jpa_ator_seq")
-    @SequenceGenerator(name = "jpa_ator_seq", sequenceName = "ator_id_seq")
+    @GeneratedValue(generator="jpa_ator_seq")
+    @SequenceGenerator(name="jpa_ator_seq", sequenceName="ator_id_seq")
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name="nome")
     private String nome;
 
-    @Column(name = "Data_Nascimento", updatable = false)
-    private LocalDateTime dataNascimento;
 
-    // Construtor padrão
+    @Column(name="dataNascimento", updatable=false)
+    private LocalDate dataNascimento;
+
     public Ator() {}
 
-    // Construtor completo
-    public Ator(String nome, LocalDateTime dataNascimento) {
+    public Ator(String nome, LocalDate dataNascimento) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
     }
 
-    // Getters e Setters
+
     public Long getId() {
         return id;
     }
@@ -45,21 +45,12 @@ public class Ator {
         this.nome = nome;
     }
 
-    public LocalDateTime getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDateTime dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
-
-    @Override
-    public String toString() {
-        return "Ator{" +
-                "id=" + id +
-                ", Nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                '}';
     }
 
     @Override
@@ -67,13 +58,21 @@ public class Ator {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ator ator = (Ator) o;
-        return Objects.equals(id, ator.id) &&
-                Objects.equals(nome, ator.nome) &&
-                Objects.equals(dataNascimento, ator.dataNascimento);
+        return id != null && Objects.equals(id, ator.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, dataNascimento);
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Ator{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                '}';
     }
 }
+
