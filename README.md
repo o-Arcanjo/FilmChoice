@@ -16,7 +16,7 @@ Esse comportamento é amplamente influenciado por aplicativos como **IMDb**, **L
 - O pensamento coletivo social;  
 - E as críticas especializadas.
 
-No entanto, nota-se a **ausência de mecanismos personalizados mais sofisticados**, que cruzem avaliações com métricas de qualidade como pontuação, frequência de visualização e comentários.  
+No entanto, nota-se a **ausência de mecanismos personalizados mais sofisticados**, que cruzem avaliações com métricas de qualidade como pontuação, frequência de visualização e comentários com objetivo de indicar um filme adaptado ao perfil do usuário quem avaliou.  
 
 Para solucionar esse problema, surgiu a iniciativa deste projeto, idealizado por **Renato Medeiros**, **Thiago Bezerra** e **Miguel Arcanjo**, estudantes do **IFPB Campus Esperança**.
 
@@ -55,6 +55,7 @@ Além disso, o sistema analisa a **quantidade de comentários** 💬 por filme, 
 
 - 👍 **Avaliações positivas**: apontam que o estilo do filme é relevante para o usuário ou algum critério novo considerado nos comentários do usuário moldou a opinião classificatória;
 - 👎 **Avaliações negativas**: indicam que fatores externos ao gênero (como expectativa, contexto, etc.) podem ter influenciado negativamente a pontuação.
+- **Novas categorias**: os conceitos mapeados por linguagens naturais de máquina criam novas entidades no sistema de forma dinâmica integradas ao mongodb
 
 Isso faz com que:
 
@@ -73,6 +74,8 @@ A proposta inclui futuras integrações com outros fatores que influenciam a ava
 - 🎭 **Filmes mais assistidos por algum ator ou diretor**
 - 🏆 **Filmes mais bem avaliados por algum ator ou diretor**
 
+- **Além de mais categorias baseadas na linguagem natural de máquina **
+
 ---
 
 ## 🏗 Modelo Conceitual
@@ -80,7 +83,7 @@ A proposta inclui futuras integrações com outros fatores que influenciam a ava
 
 Segue abaixo o modelo conceitual do projeto, representado por um diagrama de entidade relacionamento
 
-![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_conceitual.PNG)
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_conceitual.png)
 
 
 
@@ -89,5 +92,5 @@ Segue abaixo o modelo conceitual do projeto, representado por um diagrama de ent
 
 Segue abaixo o modelo lógico do projeto, representado por um diagrama de entidade relacionamento
 
-![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_logico.PNG)
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_logico.png)
 ---
