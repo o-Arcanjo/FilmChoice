@@ -16,7 +16,7 @@ Esse comportamento é amplamente influenciado por aplicativos como **IMDb**, **L
 - O pensamento coletivo social;  
 - E as críticas especializadas.
 
-No entanto, nota-se a **ausência de mecanismos personalizados mais sofisticados**, que cruzem avaliações com métricas de qualidade como pontuação, frequência de visualização e comentários.  
+No entanto, nota-se a **ausência de mecanismos personalizados mais sofisticados**, que cruzem avaliações com métricas de qualidade como pontuação, frequência de visualização e comentários com objetivo de indicar um filme adaptado ao perfil do usuário quem avaliou.  
 
 Para solucionar esse problema, surgiu a iniciativa deste projeto, idealizado por **Renato Medeiros**, **Thiago Bezerra** e **Miguel Arcanjo**, estudantes do **IFPB Campus Esperança**.
 
@@ -48,13 +48,13 @@ A aplicação **FilmChoice** tem como objetivo centralizar informações sobre f
 Com base nesses dados, o sistema busca identificar e recomendar aos usuários os títulos mais agradáveis ao seu perfil. Para isso, são considerados critérios principais:
 
 - 🗣️ **Idiomas de Filmes Disponíveis na Linguagem do Usuário**
-- 👁️ **Filmes mais assistidos por gênero**;
 - ⭐️ **Filmes mais bem-avaliados por gênero**.
 
 Além disso, o sistema analisa a **quantidade de comentários** 💬 por filme, a fim de compreender os motivos das avaliações, o que permite:
 
 - 👍 **Avaliações positivas**: apontam que o estilo do filme é relevante para o usuário ou algum critério novo considerado nos comentários do usuário moldou a opinião classificatória;
 - 👎 **Avaliações negativas**: indicam que fatores externos ao gênero (como expectativa, contexto, etc.) podem ter influenciado negativamente a pontuação.
+- **Novas categorias**: os conceitos mapeados por linguagens naturais de máquina criam novas entidades no sistema de forma dinâmica integradas ao mongodb
 
 Isso faz com que:
 
@@ -70,8 +70,9 @@ Isso faz com que:
 
 A proposta inclui futuras integrações com outros fatores que influenciam a avaliação, utilizando os próprios **comentários dos usuários** 🧠 como fonte para descobrir novas variáveis relevantes, bem como a adaptação para incluir:
 
-- 🎭 **Filmes mais assistidos por algum ator ou diretor**
 - 🏆 **Filmes mais bem avaliados por algum ator ou diretor**
+
+- **Além de mais categorias baseadas na linguagem natural de máquina **
 
 ---
 
@@ -80,7 +81,7 @@ A proposta inclui futuras integrações com outros fatores que influenciam a ava
 
 Segue abaixo o modelo conceitual do projeto, representado por um diagrama de entidade relacionamento
 
-![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_conceitual.PNG)
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_conceitual.png)
 
 
 
@@ -89,5 +90,12 @@ Segue abaixo o modelo conceitual do projeto, representado por um diagrama de ent
 
 Segue abaixo o modelo lógico do projeto, representado por um diagrama de entidade relacionamento
 
-![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_logico.PNG)
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_logico.png)
+
+
+## 📄 PDF sobre a estratégia para extração de requisitos 
+
+Segue abaixo o PDF contendo as estratégias de extração de requisitos
+
+![📥 Baixar PDF]()
 ---
