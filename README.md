@@ -48,7 +48,6 @@ A aplicação **FilmChoice** tem como objetivo centralizar informações sobre f
 Com base nesses dados, o sistema busca identificar e recomendar aos usuários os títulos mais agradáveis ao seu perfil. Para isso, são considerados critérios principais:
 
 - 🗣️ **Idiomas de Filmes Disponíveis na Linguagem do Usuário**
-- 👁️ **Filmes mais assistidos por gênero**;
 - ⭐️ **Filmes mais bem-avaliados por gênero**.
 
 Além disso, o sistema analisa a **quantidade de comentários** 💬 por filme, a fim de compreender os motivos das avaliações, o que permite:
@@ -71,7 +70,6 @@ Isso faz com que:
 
 A proposta inclui futuras integrações com outros fatores que influenciam a avaliação, utilizando os próprios **comentários dos usuários** 🧠 como fonte para descobrir novas variáveis relevantes, bem como a adaptação para incluir:
 
-- 🎭 **Filmes mais assistidos por algum ator ou diretor**
 - 🏆 **Filmes mais bem avaliados por algum ator ou diretor**
 
 - **Além de mais categorias baseadas na linguagem natural de máquina **
@@ -93,4 +91,11 @@ Segue abaixo o modelo conceitual do projeto, representado por um diagrama de ent
 Segue abaixo o modelo lógico do projeto, representado por um diagrama de entidade relacionamento
 
 ![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_logico.png)
+
+
+## 📄 PDF sobre a estratégia para extração de requisitos 
+
+Segue abaixo o PDF contendo as estratégias de extração de requisitos
+
+![📥 Baixar PDF]()
 ---
