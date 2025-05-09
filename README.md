@@ -83,7 +83,7 @@ Segue abaixo o modelo conceitual do projeto, representado por um diagrama de ent
 
 ![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_conceitual.png)
 
-
+---
 
 ## 🏗 Modelo Lógico
 
@@ -92,10 +92,17 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 
 ![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/modelo_logico.png)
 
+---
 
 ## 📄 PDF sobre a estratégia para extração de requisitos 
 
 Segue abaixo o PDF contendo as estratégias de extração de requisitos
 
-![📥 Baixar PDF]()
+![📥 Baixar PDF](https://github.com/o-Arcanjo/FilmChoice/blob/main/pdfs/Divis%C3%A3o%20Dos%20Crit%C3%A9rios%20De%20Requisitos%20Para%20Cada%20M%C3%A9todo%20de%20Extra%C3%A7%C3%A3o%20de%20Requisitos%20Orientados%20a%20StakeHolders%20Especialistas%20De%20Dom%C3%ADnios%20e%20aos%20Engenheiros%20Envolvidos%20na%20Manuten%C3%A7%C3%A3o-2.pdf)
+
+---
+
+![📥 Baixar PDF](https://github.com/o-Arcanjo/FilmChoice/blob/main/pdfs/FilmChoice-1.pdf)
+
+
 ---
