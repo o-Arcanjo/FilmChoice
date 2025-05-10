@@ -98,7 +98,8 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 
 Segue abaixo o PDF contendo as estratégias de extração de requisitos
 
-![📥 Baixar PDF](https://docs.google.com/document/d/1cW_9zurqBqR5VpTK59DtgWIAn21YP96dDZ_3MQ_Rl5Q/export?format=pdf?tab=t.0)
+[📄 Baixar Documento em PDF](https://docs.google.com/document/d/1cW_9zurqBqR5VpTK59DtgWIAn21YP96dDZ_3MQ_Rl5Q/export?format=pdf)
+
 
 ---
 
