@@ -98,12 +98,12 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 
 Segue abaixo o PDF contendo as estratégias de extração de requisitos
 
-![📥 Baixar Documento em PDF](https://docs.google.com/document/d/1cW_9zurqBqR5VpTK59DtgWIAn21YP96dDZ_3MQ_Rl5Q/export?format=pdf)
+[📄 Baixar Documento em PDF](https://docs.google.com/document/d/1cW_9zurqBqR5VpTK59DtgWIAn21YP96dDZ_3MQ_Rl5Q/export?format=pdf)
 
 
 ---
 
-![📥 Baixar PDF]([https://github.com/o-Arcanjo/FilmChoice/blob/main/pdfs/FilmChoice-1.pdf](https://docs.google.com/document/d/1ba1a7BsX-TnJe57oUCMUzilzvutQ46t4_eCK82Twp5Y/export?format=pdf))
+[📄 Baixar PDF]([https://github.com/o-Arcanjo/FilmChoice/blob/main/pdfs/FilmChoice-1.pdf](https://docs.google.com/document/d/1ba1a7BsX-TnJe57oUCMUzilzvutQ46t4_eCK82Twp5Y/export?format=pdf))
 
 
 ---
