@@ -98,7 +98,7 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 
 Segue abaixo o PDF contendo as estratégias de extração de requisitos
 
-![📥 Baixar PDF]([https://github.com/o-Arcanjo/FilmChoice/blob/main/pdfs/Divis%C3%A3o%20Dos%20Crit%C3%A9rios%20De%20Requisitos%20Para%20Cada%20M%C3%A9todo%20de%20Extra%C3%A7%C3%A3o%20de%20Requisitos%20Orientados%20a%20StakeHolders%20Especialistas%20De%20Dom%C3%ADnios%20e%20aos%20Engenheiros%20Envolvidos%20na%20Manuten%C3%A7%C3%A3o-2.pdf](https://docs.google.com/document/d/1cW_9zurqBqR5VpTK59DtgWIAn21YP96dDZ_3MQ_Rl5Q/edit?tab=t.0))
+![📥 Baixar PDF](https://docs.google.com/document/d/1cW_9zurqBqR5VpTK59DtgWIAn21YP96dDZ_3MQ_Rl5Q/export?format=pdf?tab=t.0)
 
 ---
 
