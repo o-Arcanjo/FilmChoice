@@ -13,7 +13,7 @@ import com.filmchoice.enums.TipoConexao;
 
 public final class JDBCConnection implements IManagerConnection {
     private static volatile JDBCConnection instance;
-    private final Connection connection;
+    private Connection connection;
     private static final Logger logger = LoggerFactory.getLogger(JDBCConnection.class);
 
     private JDBCConnection(ConfigVariavel config) throws SQLException {
@@ -34,7 +34,11 @@ public final class JDBCConnection implements IManagerConnection {
             synchronized (JDBCConnection.class) {
                 if (instance == null) {
                     Properties props = LoadPropertiesBd.loadProperties(TipoConexao.JDBC);  
-                    ConfigVariavel config = getInstanceConfigVariavel(props);
+                    ConfigVariavel config = new ConfigVariavel.Builder()
+                                                            .url(props.getProperty("DB_URL_JDBC"))
+                                                            .user(props.getProperty("DB_USER_JDBC"))
+                                                            .senha(props.getProperty("DB_SENHA_JDBC"))
+                                                            .build();
                     instance = new JDBCConnection(config);
                 }
             }
@@ -42,18 +46,6 @@ public final class JDBCConnection implements IManagerConnection {
         return instance;
     }
     
-    public static ConfigVariavel getInstanceConfigVariavel(Properties props){
-        String dbUrl = props.getProperty("DB_URL_JDBC");
-        String dbUser = props.getProperty("DB_USER_JDBC");
-        String dbSenha = props.getProperty("DB_PASSWORD_JDBC");
-        return new ConfigVariavel
-            .Builder()
-            .url(dbUrl)
-            .user(dbUser)
-            .senha(dbSenha)
-            .build();
-    }
-
 
     @Override
     public void conectar(){

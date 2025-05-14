@@ -15,6 +15,13 @@
 		<maven.shade.plugin.version>3.6.0</maven.shade.plugin.version>
 	</properties>
 	<dependencies>
+	  <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-bom</artifactId>
+            <version>5.5.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
 		<!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
 		<dependency>
 			<groupId>jakarta.platform</groupId>
