@@ -15,13 +15,32 @@
 		<maven.shade.plugin.version>3.6.0</maven.shade.plugin.version>
 	</properties>
 	<dependencies>
-	  <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver-bom</artifactId>
-            <version>5.5.0</version>
+
+ 	<dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-core</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.projectreactor</groupId>
+        <artifactId>reactor-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver-reactivestreams</artifactId>
+			<version>5.5.0</version>
+		</dependency>
+
+	<dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-bom</artifactId>
+            <version>2023.0.7</version>
             <type>pom</type>
             <scope>import</scope>
         </dependency>
+
+	
 		<!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
 		<dependency>
 			<groupId>jakarta.platform</groupId>

@@ -7,7 +7,8 @@ public class ConfigVariavel {
     private String dbSenha;
     private String drive;
     private String dbPorta;
-    private String dbName;
+    private String dbHost;
+    private String appName;
  
 
     private ConfigVariavel (Builder builder) {
@@ -16,7 +17,8 @@ public class ConfigVariavel {
         this.dbSenha = builder.senha;
         this.drive = builder.drive;
         this.dbPorta = builder.porta;
-        this.dbName = builder.name;
+        this.dbHost = builder.dbHost;
+        this.appName = builder.appName;
     } 
 
     public String getUrl (){
@@ -31,8 +33,8 @@ public class ConfigVariavel {
         return dbPorta;
     }
 
-    public String getNameBd(){
-        return dbName;
+    public String getHost(){
+        return dbHost;
     }
 
     public String getUser (){
@@ -43,29 +45,38 @@ public class ConfigVariavel {
         return drive;
     }
 
+    public String getAppName(){
+        return appName;
+    }
+
     public static class Builder {     
         private String url;
         private String user;
         private String senha;
         private String drive;
         private String porta;
-        private String name;
+        private String dbHost;
+        private String appName;
 
         public Builder drive(String valueDrive){
             this.drive = valueDrive;
             return this;
         }
         
-        public Builder url(String valueUrl, String especificacao){
+        public Builder url(String valueUrl){
             this.url = valueUrl;
             return this;
         }
 
-        public Builder dbName(String valueDbName){
-            this.name = valueDbName;
+        public Builder dbHost(String valueDbHost){
+            this.dbHost = valueDbHost;
             return this;
         }
 
+        public Builder appName(String appName){
+            this.appName = appName;
+            return this;
+        }
         public Builder user(String valueUser){
             this.user = valueUser;
             return this;
