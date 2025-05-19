@@ -9,6 +9,9 @@ public class ConfigVariavel {
     private String dbPorta;
     private String dbHost;
     private String appName;
+    private String database;
+    private String secretAccessKey;
+    private String accessKey;
  
 
     private ConfigVariavel (Builder builder) {
@@ -19,10 +22,21 @@ public class ConfigVariavel {
         this.dbPorta = builder.porta;
         this.dbHost = builder.dbHost;
         this.appName = builder.appName;
+        this.database = builder.database;
+        this.accessKey = builder.accessKey;
+        this.secretAccessKey = builder.secretAccessKey;
     } 
 
     public String getUrl (){
         return dbUrl;
+    }
+
+    public String getAccessKey(){
+        return accessKey;
+    }
+
+    public String getSecretAccessKey(){
+        return secretAccessKey;
     }
 
     public String getSenha (){
@@ -40,6 +54,10 @@ public class ConfigVariavel {
     public String getUser (){
         return dbUrl;
     }
+
+    public String getDatabase(){
+        return database;
+    }
     
     public String getDrive(){
         return drive;
@@ -47,6 +65,10 @@ public class ConfigVariavel {
 
     public String getAppName(){
         return appName;
+    }
+
+    public static Builder builder(){
+        return new Builder();
     }
 
     public static class Builder {     
@@ -57,6 +79,9 @@ public class ConfigVariavel {
         private String porta;
         private String dbHost;
         private String appName;
+        private String database;
+        private String secretAccessKey;
+        private String accessKey;
 
         public Builder drive(String valueDrive){
             this.drive = valueDrive;
@@ -68,15 +93,31 @@ public class ConfigVariavel {
             return this;
         }
 
+        public Builder secretAccessKey(String secretAccessKey){
+            this.secretAccessKey = secretAccessKey;
+            return this;
+        }
+
+        public Builder accessKey(String accessKey){
+            this.accessKey = accessKey;
+            return this;
+        }
+
         public Builder dbHost(String valueDbHost){
             this.dbHost = valueDbHost;
             return this;
         }
 
-        public Builder appName(String appName){
-            this.appName = appName;
+        public Builder appName(String valueAppName){
+            this.appName = valueAppName;
             return this;
         }
+
+        public Builder database(String valueDatabase){
+            this.database = valueDatabase;
+            return this;
+        }
+
         public Builder user(String valueUser){
             this.user = valueUser;
             return this;

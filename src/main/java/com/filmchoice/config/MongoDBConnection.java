@@ -2,23 +2,28 @@ package com.filmchoice.config;
 
 import java.io.IOException;
 import java.util.Properties;
-import com.filmchoice.enums.TipoConexao;
 
-import com.mongodb.*;
-import com.mongodb.reactivestreams.client.MongoCollection;
 import org.bson.Document;
-import reactor.core.publisher.Mono;
+
+import com.filmchoice.enums.TipoConexao;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoException;
+import com.mongodb.ServerApi;
+import com.mongodb.ServerApiVersion;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
+import com.mongodb.reactivestreams.client.MongoCollection;
 import com.mongodb.reactivestreams.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.eq;
+
+import reactor.core.publisher.Mono;
 
 
-public class MongoDBConnection implements IManagerConnection{
+public class MongoDBConnection implements IManagerConnection<MongoClient>, IConnection{
     private static MongoDBConnection instance;
-    private mongoClient connection;
+    private MongoClient connection;
     private String nomeDataBase;
-    private String database;
+    private MongoDatabase database;
 
     
     private ServerApi inicieServerApi(){
@@ -29,14 +34,14 @@ public class MongoDBConnection implements IManagerConnection{
 
     private MongoDBConnection (ConfigVariavel config) throws MongoException{
         String urlMongo = "mongodb+srv://" + config.getUser() + ":" + config.getSenha() +
-         "@" + config.getHost() + "/?retryWrites=true&w=majority&appName=" + config.getAppName();
+         "@" + config.getHost() + "/" + config.getDatabase() + "?retryWrites=true&w=majority&appName=" + config.getAppName();
 
-        String nomeDataBase = config.getAppName();
+        String nomeDataBase = config.getDatabase();
         ConnectionString connectionString =  new ConnectionString(urlMongo);
         MongoClientSettings settings = configure(connectionString);
         try {
-            this.mongoClient = MongoClients.create(settings);
-            this.database = mongoClient.getDatabase(this.nomeDatabase);
+            this.connection = MongoClients.create(settings);
+            this.database = connection.getDatabase(nomeDataBase);
         } catch (MongoException e) {
             throw new MongoException("Erro na conexão mongoDb", e);
         }
@@ -47,11 +52,12 @@ public class MongoDBConnection implements IManagerConnection{
             synchronized(MongoDBConnection.class){
                 if(instance == null){
                      Properties props = LoadPropertiesBd.loadProperties(TipoConexao.MONGODB);  
-                     ConfigVariavel config = new ConfigVariavel.Builder()
+                     ConfigVariavel config = ConfigVariavel.builder()
                                                                .user(props.getProperty("DB_USER_MONGODB"))
                                                                .senha(props.getProperty("DB_SENHA_MONGODB"))
                                                                .dbHost(props.getProperty("DB_NOME_MONGODB"))
                                                                .appName(props.getProperty("DB_APP_MONGODB"))
+                                                               .database(props.getProperty("DB_DATABASE_MONGODB"))
                                                                .build();
                      instance = new MongoDBConnection(config);
                 }
@@ -67,14 +73,28 @@ public class MongoDBConnection implements IManagerConnection{
         .build();
     }
 
+    
     public void conectar(){
-        
-       
+        MongoCollection<Document> collection = this.database.getCollection("teste");
+        Mono.from(collection.countDocuments())
+            .doOnNext(count -> System.out.println("Banco de Dados Conectado com Sucesso! Documentos na coleção: " + count))
+            .doOnError(error -> System.err.println("Erro ao conectar ao banco: " + error.getMessage()))
+            .subscribe();
+    };
+
+    @Override
+    public void desconectar(){
+        this.connection.close();
+        instance = null;
+    };
+
+    @Override
+    public MongoClient getConexao(){
+        return connection;
     };
 
     private MongoDatabase getDatabase(){
-      
-    }
+      return database;
+    };
 
-    public void desconectar(){};
 }
