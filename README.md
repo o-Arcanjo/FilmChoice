@@ -20,7 +20,7 @@ No entanto, nota-se a **ausência de mecanismos personalizados mais sofisticados
 
 Para solucionar esse problema, surgiu a iniciativa deste projeto, idealizado por **Renato Medeiros**, **Thiago Bezerra** e **Miguel Arcanjo**, estudantes do **IFPB Campus Esperança**.
 
-A aplicação **FilmChoice**, como o nome sugere, visa **indicar filmes adequados ao perfil de cada usuário**, com base em critérios de pontuação e comentários a filmes, considerando as categorias Diretor, Ator, Idioma e Nacionaidade desses Ator e Diretor dos filmes mais bem-avaliados. Após discussões entre os membros da equipe, decidiu-se iniciar o projeto com o critério **gênero cinematográfico**, a fim de detalhar os atributos e relacionamentos dos dados em um tempo viável.
+A aplicação **FilmChoice**, como o nome sugere, visa **indicar filmes adequados ao perfil de cada usuário**, com base em critérios de pontuação e comentários a filmes, considerando as categorias Diretor, Ator, Idioma, Nacionaidade desses Ator e Diretor, e Gênero Cinematográfico dos filmes mais bem-avaliados. Após discussões entre os membros da equipe, decidiu-se iniciar o projeto com o critério **gênero cinematográfico**, a fim de detalhar os atributos e relacionamentos dos dados em um tempo viável.
 
 ---
 
