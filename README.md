@@ -94,17 +94,9 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 
 ---
 
-## 📄 PDF sobre a estratégia para extração de requisitos 
-
-Segue abaixo o PDF contendo as estratégias de extração de requisitos
-
-[📄 Baixar Documento em PDF](https://docs.google.com/document/d/1cW_9zurqBqR5VpTK59DtgWIAn21YP96dDZ_3MQ_Rl5Q/export?format=pdf)
-
-
----
-
 ## 📄 PDF sobre o Modelo de Visão 
 
-[📄 Baixar PDF](https://docs.google.com/document/d/1dArilaEAqE509RlqsL51bttrXanPfQEzZjisIZ2EiOE/edit?tab=t.0)
+[📄 Baixar PDF](https://docs.google.com/document/d/1dArilaEAqE509RlqsL51bttrXanPfQEzZjisIZ2EiOE/export?format=pdf
+)
 
 ---
