@@ -1,6 +1,5 @@
 package com.filmchoice.config;
 
-public interface IManagerConnection {
-    void conectar();
-    void desconectar();
+public interface IManagerConnection<T> {
+    T getConexao();
 }

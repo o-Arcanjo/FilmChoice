@@ -1,4 +1,4 @@
-package br.edu.ifpb.es.daw.dao;
+package com.filmchoice.dao;
 
 import br.edu.ifpb.es.daw.DawException;
 
