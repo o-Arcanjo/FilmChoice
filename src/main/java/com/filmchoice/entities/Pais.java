@@ -2,6 +2,7 @@ package com.filmchoice.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +20,14 @@ public class Pais {
 
     @Column(name = "sigla", length = 10)
     private String sigla;
+
+    // Relacionamento com atores
+    @OneToMany(mappedBy = "pais")
+    private List<Ator> atores;
+
+    // Relacionamento com diretores
+    @OneToMany(mappedBy = "pais")
+    private List<Diretor> diretores;
 
     public Pais() {}
 

@@ -1,6 +1,7 @@
 package com.filmchoice.entities;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +15,10 @@ public class Genero {
 
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
+
+    // Relacionamento com Filme (um gênero pode ter vários filmes)
+    @OneToMany(mappedBy = "genero")
+    private List<Filme> filmes;
 
     public Genero() {}
 

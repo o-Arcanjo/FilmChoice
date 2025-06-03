@@ -3,6 +3,7 @@ package com.filmchoice.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -20,6 +21,20 @@ public class Ator {
 
     @Column(name="dataNascimento", updatable=false)
     private LocalDate dataNascimento;
+
+    // Relacionamento com Filme (muitos para muitos)
+    @ManyToMany
+    @JoinTable(
+            name = "ator_filme",
+            joinColumns = @JoinColumn(name = "ator_id"),
+            inverseJoinColumns = @JoinColumn(name = "filme_id")
+    )
+    private List<Filme> filmes;
+
+    // Relacionamento com País (muitos atores para um país)
+    @ManyToOne
+    @JoinColumn(name = "pais_id") // chave estrangeira
+    private Pais pais;
 
     public Ator() {}
 
