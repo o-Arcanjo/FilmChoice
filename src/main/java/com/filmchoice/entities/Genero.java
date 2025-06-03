@@ -17,7 +17,10 @@ public class Genero {
     private String tipo;
 
     // Relacionamento com Filme (um gênero pode ter vários filmes)
-    @OneToMany(mappedBy = "genero")
+    @ManyToMany
+    @JoinTable(name="filme_possui_genero", 
+                joinColumns = @JoinColumn(name="genero"),
+                inverseJoinColumns = @JoinColumn(name="filme_id"))
     private List<Filme> filmes;
 
     public Genero() {}

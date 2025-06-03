@@ -3,6 +3,7 @@ package com.filmchoice.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -20,6 +21,19 @@ public class Diretor {
 
     @Column(name = "dataNascimento", nullable = false, updatable=false)
     private LocalDate dataNascimento;
+
+
+    @ManyToOne
+    @JoinColumn(name="pais_id")
+    private Pais pais;
+
+    @ManyToMany
+    @JoinTable(
+               name="dirige",
+               joinColumns = @JoinColumn(name="dirige_id"),
+               inverseJoinColumns = @JoinColumn(name="filme_id")
+               )
+    private List<Filme> filmes; 
 
     public Diretor(){};
 

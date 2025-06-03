@@ -18,6 +18,14 @@ public class Avaliacao {
     @Column(name="comentario", nullable=false)
     private String comentario;
 
+    @ManyToOne
+    @JoinColumn(name="filme_id")
+    private Filme filme;
+
+    @ManyToOne
+    @JoinColumn(name="usuario_id")
+    private Usuario usuario;
+
     public Avaliacao(){}
     public Avaliacao(Integer nota, String comentario){
         this.nota = nota;

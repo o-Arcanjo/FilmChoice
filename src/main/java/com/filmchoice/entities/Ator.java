@@ -25,7 +25,7 @@ public class Ator {
     // Relacionamento com Filme (muitos para muitos)
     @ManyToMany
     @JoinTable(
-            name = "ator_filme",
+            name = "atua",
             joinColumns = @JoinColumn(name = "ator_id"),
             inverseJoinColumns = @JoinColumn(name = "filme_id")
     )
