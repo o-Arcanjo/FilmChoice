@@ -1,6 +1,7 @@
 package com.filmchoice.entities;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +15,13 @@ public class Idioma {
 
     @Column(name = "tipo", nullable = false)
     private String tipo;
+
+    @ManyToMany
+    @JoinTable(name="idioma_id",
+                joinColumns = @JoinColumn(name="idioma_id"), 
+                inverseJoinColumns = @JoinColumn(name="filme_id")
+                )
+    private List<Filme> filmes;
 
     public Idioma(){};
     public Idioma(String tipo) {

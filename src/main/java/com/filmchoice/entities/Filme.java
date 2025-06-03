@@ -23,6 +23,7 @@ public class Filme {
     @Column(name="receita", precision=14, scale=2)
     private BigDecimal receita;
 
+
     public Filme(){};
 
     public Filme(String titulo, LocalDateTime lancamento, Integer duracaoMinutos, BigDecimal receita) {

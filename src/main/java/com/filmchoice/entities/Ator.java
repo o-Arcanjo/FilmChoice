@@ -21,6 +21,20 @@ public class Ator {
     @Column(name="dataNascimento", updatable=false)
     private LocalDate dataNascimento;
 
+    // Relacionamento com Filme (muitos para muitos)
+    @ManyToMany
+    @JoinTable(
+            name = "atua",
+            joinColumns = @JoinColumn(name = "ator_id"),
+            inverseJoinColumns = @JoinColumn(name = "filme_id")
+    )
+    private List<Filme> filmes;
+
+    // Relacionamento com País (muitos atores para um país)
+    @ManyToOne
+    @JoinColumn(name = "pais_id") // chave estrangeira
+    private Pais pais;
+
     public Ator() {}
 
     public Ator(String nome, LocalDate dataNascimento) {

@@ -16,6 +16,9 @@ public class Usuario {
     @SequenceGenerator(name="jpa_usuario_seq", sequenceName="usuario_id_seq")
     private Long id;
 
+    @OneToMany
+    @JoinColumn(mappedBy="")
+
     @Column(name="nome", nullable=false)
     private String nome;
 
