@@ -1,7 +1,7 @@
 package com.filmchoice.entities;
 import jakarta.persistence.*;
 import java.time.*;
-
+import java.util.List;
 import java.util.Objects;
 
 import com.filmchoice.enums.Papel;
@@ -16,8 +16,8 @@ public class Usuario {
     @SequenceGenerator(name="jpa_usuario_seq", sequenceName="usuario_id_seq")
     private Long id;
 
-    @OneToMany
-    @JoinColumn(mappedBy="")
+    @OneToMany(mappedBy="usuario")
+    private List<Avaliacao> avaliacoes;
 
     @Column(name="nome", nullable=false)
     private String nome;

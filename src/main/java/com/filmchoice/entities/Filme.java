@@ -23,6 +23,17 @@ public class Filme {
     @Column(name="receita", precision=14, scale=2)
     private BigDecimal receita;
 
+    @ManyToMany(mappedBy = "filmes")
+    private Ator ator;
+
+    @ManyToMany(mappedBy = "filmes")
+    private Diretor diretor;
+
+    @ManyToMany(mappedBy = "filmes")
+    private Genero genero;
+
+    @ManyToMany(mappedBy = "filmes")
+    private Idioma idioma;
 
     public Filme(){};
 
