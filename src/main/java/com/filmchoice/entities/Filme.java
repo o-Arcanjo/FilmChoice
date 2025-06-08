@@ -93,7 +93,7 @@ public class Filme {
     }
 
     @Override
-    public Integer hashCode(){
+    public int hashCode(){
         return Objects.hash(id);
     }
 
