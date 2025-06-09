@@ -1,7 +1,5 @@
 package com.filmchoice.util;
 
-import java.time.LocalDate;
-
 import com.filmchoice.entities.Usuario;
 import com.filmchoice.enums.Papel;
 
@@ -20,7 +18,7 @@ public class MainUsuarioSave {
 
             // Iniciar uma transação
             EntityTransaction tx = em.getTransaction();
-            tx.begin();
+            tx.begin(); 
 
             // Salvar a entidade no banco de dados
             em.persist(usuario);

@@ -81,13 +81,13 @@ public class Filme {
     }
 
     @Override
-    public Integer hashCode(){
+    public int hashCode(){
         return Objects.hash(id);
     }
 
     @Override
     public String toString(){
-        return "Filme{ " +
+        return "Filme{ " +  
                 "id= " + id + 
                 "Titulo= " + titulo +
                 "Lancamento= " + lancamento +
