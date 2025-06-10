@@ -1,4 +1,4 @@
-package br.edu.ifpb.es.daw;
+package com.filmchoice;
 
 public class DawException extends Exception {
 

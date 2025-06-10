@@ -1,6 +1,6 @@
 package com.filmchoice.dao.impl;
 
-import br.edu.ifpb.es.daw.dao.DAO;
+import com.filmchoice.dao.DAO;
 import br.edu.ifpb.es.daw.dao.PersistenciaDawException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

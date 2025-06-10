@@ -1,6 +1,6 @@
 package com.filmchoice.dao;
 
-import br.edu.ifpb.es.daw.DawException;
+import com.filmchoice.DawException;
 
 public class PersistenciaDawException extends DawException {
 
