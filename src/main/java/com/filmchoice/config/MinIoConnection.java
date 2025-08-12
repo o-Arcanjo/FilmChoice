@@ -1,11 +1,13 @@
 package com.filmchoice.config;
-import io.minio.*;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 
 import com.filmchoice.enums.TipoConexao;
+
+import io.minio.BucketExistsArgs;
+import io.minio.MinioClient;
 
 
 public class MinIoConnection implements IManagerConnection<MinioClient>{
@@ -29,9 +31,9 @@ public class MinIoConnection implements IManagerConnection<MinioClient>{
                 if(instance == null){
                     Properties props = LoadPropertiesBd.loadProperties(TipoConexao.MINIO);
                     ConfigVariavel config = ConfigVariavel.builder()
-                                                          .url("DB_URL_MINIO")
-                                                          .secretAccessKey("DB_SECRETACCESSKEY_MINIO")  
-                                                          .accessKey("DB_ACCESSKEY_MINIO")
+                                                          .url(props.getProperty("DB_URL_MINIO"))
+                                                          .secretAccessKey(props.getProperty("DB_SECRETACCESSKEY_MINIO"))  
+                                                          .accessKey(props.getProperty("DB_ACCESSKEY_MINIO"))
                                                           .build();
 
                     instance = new MinIoConnection(config);
