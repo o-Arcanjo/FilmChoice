@@ -53,3 +53,8 @@ public class DiretorDAO extends AbstractDAOImpl<Diretor, Long> {
     public void delete(Long id) throws PersistenciaDawException {
         try {
             super.delete(id);
+        } catch (PersistenciaDawException e) {
+            throw new PersistenciaDawException("Erro ao deletar Diretor", e);
+        }
+    }
+}
