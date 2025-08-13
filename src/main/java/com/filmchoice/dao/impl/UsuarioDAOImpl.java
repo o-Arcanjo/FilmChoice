@@ -1,17 +1,40 @@
 package com.filmchoice.dao.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.filmchoice.dao.PersistenciaDawException;
 import com.filmchoice.entities.Usuario;
 
-import java.util.List;
-
 import jakarta.persistence.EntityManagerFactory;
 
-public class UsuarioDAO extends AbstractDAOImpl<Usuario, Long> {
+import com.filmchoice.dao.UsuarioDAO;
 
-    public UsuarioDAO(Class<Usuario> entityClass, EntityManagerFactory emf) {
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+
+public class UsuarioDAOImpl extends AbstractDAOImpl<Usuario, Long> implements UsuarioDAO {
+
+    public UsuarioDAOImpl(Class<Usuario> entityClass, EntityManagerFactory emf) {
         super(entityClass, emf);
     }
+
+    @Override
+    public Optional<Usuario> buscarPorEmail(String email) throws PersistenciaDawException {
+        try {
+            EntityManager em = super.getEntityManager();
+            Usuario usuario = em.createQuery(
+                    "SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+            return Optional.of(usuario);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        } catch (Exception e) {
+            throw new PersistenciaDawException("Erro ao buscar Usuário por email", e);
+        }
+    }
+
 
     @Override
     public void save(Usuario usuario) throws PersistenciaDawException {

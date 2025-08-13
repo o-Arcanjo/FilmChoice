@@ -1,9 +1,8 @@
 package com.filmchoice.dao.impl;
+import java.util.List;
 
 import com.filmchoice.dao.PersistenciaDawException;
 import com.filmchoice.entities.Ator;
-
-import java.util.List;
 
 import jakarta.persistence.EntityManagerFactory;
 
@@ -12,6 +11,7 @@ public class AtorDAO extends AbstractDAOImpl<Ator, Long> {
     public AtorDAO(Class<Ator> entityClass, EntityManagerFactory emf) {
         super(entityClass, emf);
     }
+
     @Override
     public void save(Ator ator) throws PersistenciaDawException {
         try {

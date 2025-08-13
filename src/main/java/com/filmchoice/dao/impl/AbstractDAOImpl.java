@@ -1,19 +1,18 @@
 package com.filmchoice.dao.impl;
+import java.util.List;
 
 import com.filmchoice.dao.DAO;
 import com.filmchoice.dao.PersistenciaDawException;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 
-import java.util.List;
-
 public abstract class AbstractDAOImpl<E, T> implements DAO<E, T> {
 
 	private EntityManagerFactory emf;
-
 	private Class<E> entityClass;
 
 	public AbstractDAOImpl(Class<E> entityClass, EntityManagerFactory emf) {
@@ -33,12 +32,12 @@ public abstract class AbstractDAOImpl<E, T> implements DAO<E, T> {
 			try {
 				em.persist(obj);
 				transaction.commit();
-			} catch (PersistenceException pe) {
-				pe.printStackTrace();
+			} catch (PersistenceException e) {
+				e.printStackTrace();
 				if (transaction.isActive()) {
 					transaction.rollback();
 				}
-				throw new PersistenciaDawException("Ocorreu algum erro ao tentar salvar a entidade.", pe);
+				throw new PersistenciaDawException("Ocorreu algum erro ao tentar salvar a entidade.", e);
 			}
 		}
 	}
@@ -52,12 +51,12 @@ public abstract class AbstractDAOImpl<E, T> implements DAO<E, T> {
 				E resultado = em.merge(obj);
 				transaction.commit();
 				return resultado;
-			} catch (PersistenceException pe) {
-				pe.printStackTrace();
+			} catch (PersistenceException e) {
+				e.printStackTrace();
 				if (transaction.isActive()) {
 					transaction.rollback();
 				}
-				throw new PersistenciaDawException("Ocorreu algum erro ao tentar atualizar a entidade.", pe);
+				throw new PersistenciaDawException("Ocorreu algum erro ao tentar atualizar a entidade.", e);
 			}
 		}
 	}
@@ -71,12 +70,12 @@ public abstract class AbstractDAOImpl<E, T> implements DAO<E, T> {
 				E obj = em.getReference(this.entityClass, primaryKey);
 				em.remove(obj);
 				transaction.commit();
-			} catch (PersistenceException pe) {
-				pe.printStackTrace();
+			} catch (PersistenceException e) {
+				e.printStackTrace();
 				if (transaction.isActive()) {
 					transaction.rollback();
 				}
-				throw new PersistenciaDawException("Ocorreu algum erro ao tentar remover a entidade.", pe);
+				throw new PersistenciaDawException("Ocorreu algum erro ao tentar remover a entidade.", e);
 			}
 		}
 	}
@@ -86,9 +85,9 @@ public abstract class AbstractDAOImpl<E, T> implements DAO<E, T> {
 		try(EntityManager em = getEntityManager()) {
 			try {
 				return em.find(this.entityClass, primaryKey);
-			} catch (PersistenceException pe) {
-				pe.printStackTrace();
-				throw new PersistenciaDawException("Ocorreu algum erro ao tentar recuperar a entidade com base no ID.", pe);
+			} catch (PersistenceException e) {
+				e.printStackTrace();
+				throw new PersistenciaDawException("Ocorreu algum erro ao tentar recuperar a entidade com base no ID.", e);
 			}
 		}
 	}
@@ -99,9 +98,9 @@ public abstract class AbstractDAOImpl<E, T> implements DAO<E, T> {
 			try {
 				TypedQuery<E> query = em.createQuery(String.format("SELECT obj FROM %s obj", this.entityClass.getSimpleName()), this.entityClass);
 				return query.getResultList();
-			} catch (PersistenceException pe) {
-				pe.printStackTrace();
-				throw new PersistenciaDawException("Ocorreu algum erro ao tentar recuperar todas as instâncias da entidade.", pe);
+			} catch (PersistenceException e) {
+				e.printStackTrace();
+				throw new PersistenciaDawException("Ocorreu algum erro ao tentar recuperar todas as instâncias da entidade.", e);
 			}
 		}
 	}
