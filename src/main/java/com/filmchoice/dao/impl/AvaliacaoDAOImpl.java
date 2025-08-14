@@ -1,15 +1,16 @@
 package com.filmchoice.dao.impl;
 
+import java.util.List;
+
+import com.filmchoice.dao.AvaliacaoDAO;
 import com.filmchoice.dao.PersistenciaDawException;
 import com.filmchoice.entities.Avaliacao;
 
-import java.util.List;
-
 import jakarta.persistence.EntityManagerFactory;
 
-public class AvaliacaoDAO extends AbstractDAOImpl<Avaliacao, Long> {
+public class AvaliacaoDAOImpl extends AbstractDAOImpl<Avaliacao, Long> implements AvaliacaoDAO{
 
-    public AvaliacaoDAO(Class<Avaliacao> entityClass, EntityManagerFactory emf) {
+    public AvaliacaoDAOImpl(Class<Avaliacao> entityClass, EntityManagerFactory emf) {
         super(entityClass, emf);
     }
 

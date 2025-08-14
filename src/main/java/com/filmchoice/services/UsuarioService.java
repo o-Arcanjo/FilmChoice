@@ -1,10 +1,9 @@
-import com.filmchoice.dao.PersistenciaDawException;
+package com.filmchoice.services;
 import com.filmchoice.dto.UsuarioDTO;
-import com.filmchoice.entities.Usuario;
-import com.filmchoice.services.ServiceException;
 
 public interface UsuarioService{
-   Usuario cadastrarUsuario(UsuarioDTO usuarioEntrada) throws ServiceException;
+   void cadastrarUsuario(UsuarioDTO usuarioEntrada) throws ServiceException;
+   boolean login(String email, String senha) throws ServiceException;
    boolean verificarUsuarioCadastrado(UsuarioDTO usuarioEntrada) throws ServiceException;
 }
 
