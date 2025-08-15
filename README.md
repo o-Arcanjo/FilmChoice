@@ -107,3 +107,42 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 )
 
 ---
+
+## 🏗 Diagrama de classes
+
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramadeClasses.jpeg)
+
+---
+
+## 🏗 Diagrama de casos de uso
+
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/)
+
+
+---
+
+
+## 🏗 Diagramas de sequência
+
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramaDeSequencias.jpeg)
+
+---
+
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramaDeSequencias2.jpeg)
+
+---
+
+
+## 🏗 Diagrama de atividades
+
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramaDeAtividade.jpeg)
+
+---
+
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramadeAtividade2.jpeg)
+
+---
+
+## 🏗 Diagrama de estados
+
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramadeEstados.jpeg)
