@@ -100,3 +100,10 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 )
 
 ---
+
+## 📄 PDF sobre o CheckList
+
+[📄 Baixar PDF](https://docs.google.com/document/d/1bZqhPN_UYVAQLPRtLRI4MqxOH4hNYUYF73RPqBcrR8k/export?format=pdf
+)
+
+---
