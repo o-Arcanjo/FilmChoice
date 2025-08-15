@@ -116,7 +116,7 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 
 ## 🏗 Diagrama de casos de uso
 
-![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/)
+![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramadeCaso.jpeg)
 
 
 ---
@@ -146,3 +146,4 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 ## 🏗 Diagrama de estados
 
 ![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramadeEstados.jpeg)
+
