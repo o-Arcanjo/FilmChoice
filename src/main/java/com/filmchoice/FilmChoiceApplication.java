@@ -10,4 +10,4 @@ public class FilmChoiceApplication{
         SpringApplication.run(FilmChoiceApplication.class, args);
     }
     
-}
+}   
