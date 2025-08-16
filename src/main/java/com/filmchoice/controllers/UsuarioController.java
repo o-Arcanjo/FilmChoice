@@ -1,10 +1,12 @@
 package com.filmchoice.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.filmchoice.dto.UsuarioDTORecebido;
 import com.filmchoice.dto.UsuarioDTO;
+import com.filmchoice.services.ServiceException;
 import com.filmchoice.services.UsuarioService;
 
 @RestController
@@ -18,9 +20,13 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastro")
-    public ResponseEntity<UsuarioDTO> criarUsuario(@RequestBody UsuarioDTORecebido usuarioDTORecebido) {
-        UsuarioDTO usuarioCriado = usuarioService.cadastrarUsuario(usuarioDTORecebido);
-        return ResponseEntity.status(201).body(usuarioCriado);
+    public ResponseEntity<String> criarUsuario(@RequestBody UsuarioDTORecebido usuarioDTORecebido) {
+        try{
+            UsuarioDTO usuarioCriado = usuarioService.cadastrarUsuario(usuarioDTORecebido);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Usuário cadastrado com sucesso!");
+        }catch(ServiceException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }   
     }
     
     @GetMapping("/verificar")
