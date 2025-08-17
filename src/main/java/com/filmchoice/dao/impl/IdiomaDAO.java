@@ -5,15 +5,22 @@ import com.filmchoice.entities.Idioma;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import jakarta.persistence.EntityManagerFactory;
 
+
+@Repository
+@Transactional(readOnly = true)
 public class IdiomaDAO extends AbstractDAOImpl<Idioma, Long> {
 
-    public IdiomaDAO(Class<Idioma> entityClass, EntityManagerFactory emf) {
-        super(entityClass, emf);
+    public IdiomaDAO(EntityManagerFactory emf) {
+        super(Idioma.class, emf);
     }
 
-    @Override
+   @Override
+    @Transactional
     public void save(Idioma idioma) throws PersistenciaDawException {
         try {
             super.save(idioma);
@@ -23,6 +30,7 @@ public class IdiomaDAO extends AbstractDAOImpl<Idioma, Long> {
     }
 
     @Override
+    @Transactional
     public Idioma update(Idioma idioma) throws PersistenciaDawException {
         try {
             return super.update(idioma);
@@ -50,6 +58,7 @@ public class IdiomaDAO extends AbstractDAOImpl<Idioma, Long> {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) throws PersistenciaDawException {
         try {
             super.delete(id);

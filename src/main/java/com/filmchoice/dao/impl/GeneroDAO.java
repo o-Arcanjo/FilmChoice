@@ -5,15 +5,21 @@ import com.filmchoice.entities.Genero;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import jakarta.persistence.EntityManagerFactory;
 
+@Repository
+@Transactional(readOnly = true)
 public class GeneroDAO extends AbstractDAOImpl<Genero, Long> {
 
-    public GeneroDAO(Class<Genero> entityClass, EntityManagerFactory emf) {
-        super(entityClass, emf);
+    public GeneroDAO(EntityManagerFactory emf) {
+        super(Genero.class, emf);
     }
 
-    @Override
+   @Override
+    @Transactional
     public void save(Genero genero) throws PersistenciaDawException {
         try {
             super.save(genero);
@@ -23,6 +29,7 @@ public class GeneroDAO extends AbstractDAOImpl<Genero, Long> {
     }
 
     @Override
+    @Transactional
     public Genero update(Genero genero) throws PersistenciaDawException {
         try {
             return super.update(genero);
@@ -50,6 +57,7 @@ public class GeneroDAO extends AbstractDAOImpl<Genero, Long> {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) throws PersistenciaDawException {
         try {
             super.delete(id);

@@ -1,18 +1,25 @@
 package com.filmchoice.dao.impl;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.filmchoice.dao.PersistenciaDawException;
 import com.filmchoice.entities.Ator;
 
 import jakarta.persistence.EntityManagerFactory;
 
+
+@Repository
+@Transactional(readOnly = true)
 public class AtorDAO extends AbstractDAOImpl<Ator, Long> {
 
-    public AtorDAO(Class<Ator> entityClass, EntityManagerFactory emf) {
-        super(entityClass, emf);
+    public AtorDAO(EntityManagerFactory emf) {
+        super(Ator.class, emf);
     }
 
     @Override
+    @Transactional
     public void save(Ator ator) throws PersistenciaDawException {
         try {
             super.save(ator);
@@ -22,6 +29,7 @@ public class AtorDAO extends AbstractDAOImpl<Ator, Long> {
     }
 
     @Override
+    @Transactional
     public Ator update(Ator ator) throws PersistenciaDawException {
         try {
             return super.update(ator);
@@ -49,6 +57,7 @@ public class AtorDAO extends AbstractDAOImpl<Ator, Long> {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) throws PersistenciaDawException {
         try {
             super.delete(id);

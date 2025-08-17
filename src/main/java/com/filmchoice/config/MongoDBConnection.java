@@ -2,12 +2,13 @@ package com.filmchoice.config;
 
 import java.io.IOException;
 import java.util.Properties;
-
 import org.bson.Document;
-
 import com.filmchoice.enums.TipoConexao;
 import com.mongodb.*;
-
+import com.mongodb.reactivestreams.client.MongoClient;
+import com.mongodb.reactivestreams.client.MongoClients;
+import com.mongodb.reactivestreams.client.MongoCollection;
+import com.mongodb.reactivestreams.client.MongoDatabase;
 import reactor.core.publisher.Mono;
 
 
@@ -28,7 +29,7 @@ public class MongoDBConnection implements IManagerConnection<MongoClient>, IConn
         String urlMongo = "mongodb+srv://" + config.getUser() + ":" + config.getSenha() +
          "@" + config.getHost() + "/" + config.getDatabase() + "?retryWrites=true&w=majority&appName=" + config.getAppName();
 
-        String nomeDataBase = config.getDatabase();
+         this.nomeDataBase = config.getDatabase();
         ConnectionString connectionString =  new ConnectionString(urlMongo);
         MongoClientSettings settings = configure(connectionString);
         try {

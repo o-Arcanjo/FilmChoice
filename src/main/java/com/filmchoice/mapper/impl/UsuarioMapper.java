@@ -1,8 +1,12 @@
 package com.filmchoice.mapper.impl;
+import org.springframework.stereotype.Component;
+
 import com.filmchoice.dto.UsuarioDTO;
 import com.filmchoice.entities.Usuario;
 import com.filmchoice.mapper.Converter;
 
+
+@Component
 public class UsuarioMapper implements Converter<UsuarioDTO, Usuario> {
 
     @Override

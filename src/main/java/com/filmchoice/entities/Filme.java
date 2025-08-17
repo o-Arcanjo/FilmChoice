@@ -10,7 +10,7 @@ public class Filme {
     @Id
     @GeneratedValue(generator="jpa_filme_seq")
     @SequenceGenerator(name="jpa_filme_seq", sequenceName="filme_id_seq")
-    private Long id;
+    private Long id;    
 
     @Column(name="titulo", nullable=false)
     private String titulo;
@@ -24,16 +24,16 @@ public class Filme {
     private BigDecimal receita;
 
     @ManyToMany(mappedBy = "filmes")
-    private Ator ator;
+    private List<Ator> ator;
 
     @ManyToMany(mappedBy = "filmes")
-    private Diretor diretor;
+    private List<Diretor> diretor;
 
     @ManyToMany(mappedBy = "filmes")
-    private Genero genero;
+    private List<Genero> genero;
 
     @ManyToMany(mappedBy = "filmes")
-    private Idioma idioma;
+    private List<Idioma> idioma;
 
     public Filme(){};
 

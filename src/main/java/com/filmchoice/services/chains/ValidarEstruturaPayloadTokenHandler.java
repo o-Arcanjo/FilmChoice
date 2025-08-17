@@ -1,25 +1,29 @@
 package com.filmchoice.services.chains;
-
 import com.filmchoice.dto.Payload;
 import com.filmchoice.services.TokenService;
 
-public class ValidarEstruturaPayloadTokenHandler extends HandlerAbstract<HandlerAbstract<?>>{
-    private final Payload payload;
+public class ValidarEstruturaPayloadTokenHandler 
+extends HandlerAbstract<ValidarEstruturaPayloadTokenHandler, Payload>{
     private final TokenService tokenService;
 
-    public ValidarEstruturaPayloadTokenHandler(Payload payload, TokenService tokenService){
+    public ValidarEstruturaPayloadTokenHandler(TokenService tokenService){
         super(null);
-        this.payload = payload;
         this.tokenService = tokenService;
     }
 
     @Override
-    public ValidarEstruturaPayloadTokenHandler obterProximaEntidade() {
+    public ValidarEstruturaPayloadTokenHandler obterProximaInstancia() { 
         return null;
     }
 
     @Override
-    public boolean verificarResponsabilidade() {
+    public boolean verificarResponsabilidade(Payload payload) {
         return tokenService.verificarPayload(payload);
+    }
+
+    @Override
+    public boolean verificarProximo(Payload responsabilidade) {
+        tokenService.verificarPayload(responsabilidade);
+        return true;
     }
 }

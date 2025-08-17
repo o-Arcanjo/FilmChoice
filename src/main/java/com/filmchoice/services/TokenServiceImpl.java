@@ -1,6 +1,9 @@
 package com.filmchoice.services;
 
 import java.sql.Date;
+
+import org.springframework.stereotype.Service;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -10,6 +13,7 @@ import com.filmchoice.dto.Payload;
 import com.filmchoice.enums.ChaveSecreta;
 import com.filmchoice.enums.Papel;
 
+@Service
 public class TokenServiceImpl implements TokenService{
     private static final long EXPIRATION_TIME = 3600000; 
     

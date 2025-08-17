@@ -5,15 +5,21 @@ import com.filmchoice.entities.Diretor;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import jakarta.persistence.EntityManagerFactory;
 
+@Repository
+@Transactional(readOnly = true)
 public class DiretorDAO extends AbstractDAOImpl<Diretor, Long> {
 
-    public DiretorDAO(Class<Diretor> entityClass, EntityManagerFactory emf) {
-        super(entityClass, emf);
+    public DiretorDAO(EntityManagerFactory emf) {
+        super(Diretor.class, emf);
     }
 
     @Override
+    @Transactional
     public void save(Diretor diretor) throws PersistenciaDawException {
         try {
             super.save(diretor);
@@ -23,6 +29,7 @@ public class DiretorDAO extends AbstractDAOImpl<Diretor, Long> {
     }
 
     @Override
+    @Transactional
     public Diretor update(Diretor diretor) throws PersistenciaDawException {
         try {
             return super.update(diretor);
@@ -50,6 +57,7 @@ public class DiretorDAO extends AbstractDAOImpl<Diretor, Long> {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) throws PersistenciaDawException {
         try {
             super.delete(id);

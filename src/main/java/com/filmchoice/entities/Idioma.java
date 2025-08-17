@@ -10,7 +10,7 @@ public class Idioma {
 
     @Id
     @GeneratedValue(generator = "jpa_idioma_seq")
-    @SequenceGenerator(name = "jpa_idioma_seq", sequenceName = "idioma_id_seq")
+    @SequenceGenerator(name = "jpa_idioma_seq", sequenceName = "idioma_id_seq",  allocationSize = 1 )
     private Long id;
 
     @Column(name = "tipo", nullable = false)

@@ -1,8 +1,16 @@
 package com.filmchoice.services;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import com.filmchoice.enums.ChaveSecreta;
 
-public class AuthServicesImpl implements AuthService{
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+@Service
+public class AuthServicesImpl extends AuthServiceImplAbstract<TokenService> {
+    private final BCryptPasswordEncoder encoder;
+
+     public AuthServicesImpl(TokenService tokenService, ChaveSecreta chave) {
+        super(tokenService, chave);  
+        this.encoder = new BCryptPasswordEncoder();
+    }
 
     @Override
     public String criptografarSenha(String senha) {
@@ -15,8 +23,13 @@ public class AuthServicesImpl implements AuthService{
     }
 
     @Override
-    public boolean autenticar(Long token) {
-        throw new UnsupportedOperationException("Unimplemented method 'autenticar'");
+    public boolean autenticar(String token) {
+        return super.autenticar(token);
+    }
+
+    @Override
+    public boolean autorizar(String papelEsperado, String papelRecebido) {
+       return super.autorizar(papelEsperado, papelRecebido);
     }
     
 }

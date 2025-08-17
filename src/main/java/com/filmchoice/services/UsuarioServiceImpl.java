@@ -7,10 +7,9 @@ import com.filmchoice.dto.UsuarioDTORecebido;
 import com.filmchoice.entities.Usuario;
 import com.filmchoice.enums.ChaveSecreta;
 import com.filmchoice.mapper.impl.UsuarioMapper;
-import com.filmchoice.services.ServiceException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioDAO usuarioDAO;
     private final UsuarioMapper usuarioMapper;
@@ -24,6 +23,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.tokenService = tokenService;
     }
 
+    @Override
     public boolean verificarUsuarioCadastrado(String email) throws ServiceException{
         try {
             return usuarioDAO.buscarPorEmail(email).isPresent();
@@ -32,7 +32,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
-    public Usuario cadastrarUsuario(UsuarioDTORecebido usuarioDTORecebido) throws ServiceException{
+    @Override
+    public void cadastrarUsuario(UsuarioDTORecebido usuarioDTORecebido) throws ServiceException{
         if (verificarUsuarioCadastrado(usuarioDTORecebido.getEmail())) {
             throw new ServiceException("Usuário já cadastrado com o e-mail: " + usuarioDTORecebido.getEmail());
         }
@@ -48,7 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         try {   
             Usuario usuario = usuarioMapper.converterElementoEntidade(usuarioDTO);
-            return usuarioDAO.save(usuario);
+            usuarioDAO.save(usuario);
         } catch (PersistenciaDawException e) {
             throw new ServiceException("Erro ao cadastrar usuário", e);
         }
