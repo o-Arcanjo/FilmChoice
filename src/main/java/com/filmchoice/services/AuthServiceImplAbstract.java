@@ -1,23 +1,22 @@
 package com.filmchoice.services;
 import com.filmchoice.dto.Payload;
 import com.filmchoice.enums.ChaveSecreta;
+import com.filmchoice.services.chains.ConstruirCadeiaHandlerToken;
+import com.filmchoice.services.chains.Handler;
+import com.filmchoice.services.chains.ValidarAssinaturaTokenHandler;
+
 
 public abstract class AuthServiceImplAbstract<T extends TokenService> implements AuthService {
     private final T serviceAuth;
-    private final ChaveSecreta chave;
 
-    public AuthServiceImplAbstract(T serviceAuth, ChaveSecreta chave) {
+    public AuthServiceImplAbstract(T serviceAuth) {
         this.serviceAuth = serviceAuth;
-        this.chave = chave;
+
     }
 
     public boolean autenticar(String token) {
-        try{
-            Payload payload = this.serviceAuth.validarToken(token, chave);
-            return this.serviceAuth.verificarPayload(payload);
-        }catch(ServiceException e){
-            return false;
-        }   
+            Handler<ValidarAssinaturaTokenHandler, String> tokenValidationChain = ConstruirCadeiaHandlerToken.construirCadeia(serviceAuth);
+            return tokenValidationChain.verificarProximo(token);
     }
 
     public  boolean autorizar(String papelEsperado, String papelRecebido){

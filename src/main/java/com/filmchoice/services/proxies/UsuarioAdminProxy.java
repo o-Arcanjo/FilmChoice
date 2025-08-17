@@ -1,160 +1,199 @@
 package com.filmchoice.services.proxies;
 
 import java.util.List;
+
 import com.filmchoice.dto.AtorDTO;
 import com.filmchoice.dto.DiretorDTO;
 import com.filmchoice.dto.FilmeDTO;
 import com.filmchoice.dto.GeneroDTO;
 import com.filmchoice.dto.IdiomaDTO;
 import com.filmchoice.dto.PaisDTO;
+import com.filmchoice.services.AuthService;
 import com.filmchoice.services.ServiceException;
 import com.filmchoice.services.UsuarioAdminService;
 
+/**
+ * Proxy de segurança para o serviço administrativo.
+ * Intercepta todas as chamadas para verificar a autenticação do usuário
+ * antes de delegar a operação para a implementação real do serviço.
+ */
 public class UsuarioAdminProxy implements UsuarioAdminService {
 
-    private 
+    private final AuthService authService;
+    private final UsuarioAdminService servicoReal; // O serviço real que executa a lógica de negócio
+
+    /**
+     * Constrói o Proxy.
+     * @param authService O serviço de autenticação.
+     * @param servicoReal A implementação concreta do serviço administrativo a ser protegida.
+     */
+    public UsuarioAdminProxy(AuthService authService, UsuarioAdminService servicoReal) {
+        this.authService = authService;
+        this.servicoReal = servicoReal;
+    }
+
+    /**
+     * Método privado e centralizado para verificar a autenticação.
+     * É chamado no início de cada método público.
+     * @param token O token a ser validado.
+     * @throws ServiceException se a autenticação falhar.
+     */
+    private void autenticarEAutorizar(String token) throws ServiceException {
+        if (!authService.autenticar(token)) {
+            // Mensagem de erro mais específica para o cliente.
+            throw new ServiceException("Acesso não autorizado. Token inválido, expirado ou permissões insuficientes.");
+        }
+    }
+
+    // --- OPERAÇÕES DE CADASTRO (CREATE) ---
 
     @Override
-    public void cadastrarFilme(FilmeDTO filmeEntrada) throws ServiceException {
-        
+    public void cadastrarFilme(FilmeDTO filmeEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.cadastrarFilme(filmeEntrada, token);
     }
 
     @Override
-    public void cadastrarAtor(AtorDTO atorEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrarAtor'");
+    public void cadastrarAtor(AtorDTO atorEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.cadastrarAtor(atorEntrada, token);
     }
 
     @Override
-    public void cadastrarDiretor(DiretorDTO diretorEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrarDiretor'");
+    public void cadastrarDiretor(DiretorDTO diretorEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.cadastrarDiretor(diretorEntrada, token);
     }
 
     @Override
-    public void cadastrarGenero(GeneroDTO generoEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrarGenero'");
+    public void cadastrarGenero(GeneroDTO generoEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.cadastrarGenero(generoEntrada, token);
     }
 
     @Override
-    public void cadastrarIdioma(IdiomaDTO idiomaEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrarIdioma'");
+    public void cadastrarIdioma(IdiomaDTO idiomaEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.cadastrarIdioma(idiomaEntrada, token);
     }
 
     @Override
-    public void cadastrarPais(PaisDTO paisEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrarPais'");
+    public void cadastrarPais(PaisDTO paisEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.cadastrarPais(paisEntrada, token);
+    }
+
+    // --- OPERAÇÕES DE LISTAGEM (READ) ---
+
+    @Override
+    public List<FilmeDTO> listarFilmesCadastrados(String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        return servicoReal.listarFilmesCadastrados(token);
     }
 
     @Override
-    public List<FilmeDTO> listarFilmesCadastrados() throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarFilmesCadastrados'");
+    public List<AtorDTO> listarAtoresCadastrados(String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        return servicoReal.listarAtoresCadastrados(token);
     }
 
     @Override
-    public List<AtorDTO> listarAtoresCadastrados() throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarAtoresCadastrados'");
+    public List<DiretorDTO> listarDiretoresCadastrados(String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        return servicoReal.listarDiretoresCadastrados(token);
     }
 
     @Override
-    public List<DiretorDTO> listarDiretoresCadastrados() throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarDiretoresCadastrados'");
+    public List<GeneroDTO> listarGenerosCadastrados(String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        return servicoReal.listarGenerosCadastrados(token);
     }
 
     @Override
-    public List<GeneroDTO> listarGenerosCadastrados() throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarGenerosCadastrados'");
+    public List<IdiomaDTO> listarIdiomasCadastrados(String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        return servicoReal.listarIdiomasCadastrados(token);
     }
 
     @Override
-    public List<IdiomaDTO> listarIdiomasCadastrados() throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarIdiomasCadastrados'");
+    public List<PaisDTO> listarPaisesCadastrados(String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        return servicoReal.listarPaisesCadastrados(token);
+    }
+
+    // --- OPERAÇÕES DE ATUALIZAÇÃO (UPDATE) ---
+
+    @Override
+    public void atualizarFilme(FilmeDTO filmeEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.atualizarFilme(filmeEntrada, token);
     }
 
     @Override
-    public List<PaisDTO> listarPaisesCadastrados() throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarPaisesCadastrados'");
+    public void atualizarAtor(AtorDTO atorEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.atualizarAtor(atorEntrada, token);
     }
 
     @Override
-    public void atualizarFilme(FilmeDTO filmeEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizarFilme'");
+    public void atualizarDiretor(DiretorDTO diretorEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.atualizarDiretor(diretorEntrada, token);
     }
 
     @Override
-    public void atualizarAtor(AtorDTO atorEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizarAtor'");
+    public void atualizarGenero(GeneroDTO generoEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.atualizarGenero(generoEntrada, token);
     }
 
     @Override
-    public void atualizarDiretor(DiretorDTO diretorEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizarDiretor'");
+    public void atualizarIdioma(IdiomaDTO idiomaEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.atualizarIdioma(idiomaEntrada, token);
     }
 
     @Override
-    public void atualizarGenero(GeneroDTO generoEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizarGenero'");
+    public void atualizarPais(PaisDTO paisEntrada, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.atualizarPais(paisEntrada, token);
+    }
+
+    // --- OPERAÇÕES DE EXCLUSÃO (DELETE) ---
+
+    @Override
+    public void deletarFilme(Long id, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.deletarFilme(id, token);
     }
 
     @Override
-    public void atualizarIdioma(IdiomaDTO idiomaEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizarIdioma'");
+    public void deletarAtor(Long id, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.deletarAtor(id, token);
     }
 
     @Override
-    public void atualizarPais(PaisDTO paisEntrada) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'atualizarPais'");
+    public void deletarDiretor(Long id, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.deletarDiretor(id, token);
     }
 
     @Override
-    public void deletarFilme(Long id) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletarFilme'");
+    public void deletarGenero(Long id, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.deletarGenero(id, token);
     }
 
     @Override
-    public void deletarAtor(Long id) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletarAtor'");
+    public void deletarIdioma(Long id, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.deletarIdioma(id, token);
     }
 
     @Override
-    public void deletarDiretor(Long id) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletarDiretor'");
+    public void deletarPais(Long id, String token) throws ServiceException {
+        autenticarEAutorizar(token);
+        servicoReal.deletarPais(id, token);
     }
-
-    @Override
-    public void deletarGenero(Long id) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletarGenero'");
-    }
-
-    @Override
-    public void deletarIdioma(Long id) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletarIdioma'");
-    }
-
-    @Override
-    public void deletarPais(Long id) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletarPais'");
-    }
-    
 }
