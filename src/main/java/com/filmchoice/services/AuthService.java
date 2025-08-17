@@ -1,6 +1,7 @@
 package com.filmchoice.services;
 
 public interface AuthService {
-    boolean verificarSenha(String senha);
+    String criptografarSenha(String senha);
+    boolean verificarSenha(String senha, String hashArmazenado);
     boolean autenticar(Long token);
 }

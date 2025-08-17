@@ -7,7 +7,7 @@ import com.filmchoice.entities.Usuario;
 
 public interface UsuarioDAO{
     Optional<Usuario> buscarPorEmail(String email) throws PersistenciaDawException;
-    public void save(Usuario usuario) throws PersistenciaDawException;
+    public Usuario save(Usuario usuario) throws PersistenciaDawException;
     public Usuario update(Usuario usuario) throws PersistenciaDawException;
     public Usuario getByID(Long id) throws PersistenciaDawException;
     public List<Usuario> getAll() throws PersistenciaDawException;

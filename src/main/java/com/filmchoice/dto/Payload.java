@@ -29,7 +29,7 @@ public class Payload {
         return periodoCriacao;
     }
 
-    public Builder builder(){
+    public static Builder builder(){
         return new Builder();
     }
 

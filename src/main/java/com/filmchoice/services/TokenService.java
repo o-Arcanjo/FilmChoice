@@ -4,6 +4,7 @@ import com.filmchoice.dto.Payload;
 import com.filmchoice.enums.ChaveSecreta;
 
 public interface TokenService {
-   Payload decodificarToken(Long token, ChaveSecreta chaveSecreta);
-   Long criarToken(Payload payload, ChaveSecreta chaveSecreta); 
+   Payload validarToken(String token, ChaveSecreta chaveSecreta) throws ServiceException;
+   boolean verificarPayload(Payload payload);
+   String criarToken(Payload payload, ChaveSecreta chaveSecreta); 
 }
