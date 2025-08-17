@@ -1,5 +1,6 @@
 package com.filmchoice.services;
 
+import com.filmchoice.dao.PersistenciaDawException; // Importar a exceção
 import com.filmchoice.dto.AtorDTO;
 import com.filmchoice.dto.DiretorDTO;
 import com.filmchoice.dto.FilmeDTO;
@@ -11,44 +12,44 @@ import java.util.List;
 
 /**
  * Define o contrato para as operações administrativas do sistema.
- * Todas as operações definidas nesta interface exigem autenticação e, portanto,
- * requerem a passagem de um token de autorização.
+ * Todas as operações podem lançar exceções de serviço (lógica de negócio)
+ * ou de persistência (acesso a dados).
  */
 public interface UsuarioAdminService {
 
     // --- OPERAÇÕES DE CADASTRO (CREATE) ---
 
-    void cadastrarFilme(FilmeDTO filmeEntrada, String token) throws ServiceException;
-    void cadastrarAtor(AtorDTO atorEntrada, String token) throws ServiceException;
-    void cadastrarDiretor(DiretorDTO diretorEntrada, String token) throws ServiceException;
-    void cadastrarGenero(GeneroDTO generoEntrada, String token) throws ServiceException;
-    void cadastrarIdioma(IdiomaDTO idiomaEntrada, String token) throws ServiceException;
-    void cadastrarPais(PaisDTO paisEntrada, String token) throws ServiceException;
+    void cadastrarFilme(FilmeDTO filmeEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void cadastrarAtor(AtorDTO atorEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void cadastrarDiretor(DiretorDTO diretorEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void cadastrarGenero(GeneroDTO generoEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void cadastrarIdioma(IdiomaDTO idiomaEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void cadastrarPais(PaisDTO paisEntrada, String token) throws ServiceException, PersistenciaDawException;
 
-    // --- OPERAÇÕES DE LISTAGEM (READ) ---
+    // --- OPERAções DE LISTAGEM (READ) ---
 
-    List<FilmeDTO> listarFilmesCadastrados(String token) throws ServiceException;
-    List<AtorDTO> listarAtoresCadastrados(String token) throws ServiceException;
-    List<DiretorDTO> listarDiretoresCadastrados(String token) throws ServiceException;
-    List<GeneroDTO> listarGenerosCadastrados(String token) throws ServiceException;
-    List<IdiomaDTO> listarIdiomasCadastrados(String token) throws ServiceException;
-    List<PaisDTO> listarPaisesCadastrados(String token) throws ServiceException;
+    List<FilmeDTO> listarFilmesCadastrados(String token) throws ServiceException, PersistenciaDawException;
+    List<AtorDTO> listarAtoresCadastrados(String token) throws ServiceException, PersistenciaDawException;
+    List<DiretorDTO> listarDiretoresCadastrados(String token) throws ServiceException, PersistenciaDawException;
+    List<GeneroDTO> listarGenerosCadastrados(String token) throws ServiceException, PersistenciaDawException;
+    List<IdiomaDTO> listarIdiomasCadastrados(String token) throws ServiceException, PersistenciaDawException;
+    List<PaisDTO> listarPaisesCadastrados(String token) throws ServiceException, PersistenciaDawException;
 
     // --- OPERAÇÕES DE ATUALIZAÇÃO (UPDATE) ---
 
-    void atualizarFilme(FilmeDTO filmeEntrada, String token) throws ServiceException;
-    void atualizarAtor(AtorDTO atorEntrada, String token) throws ServiceException;
-    void atualizarDiretor(DiretorDTO diretorEntrada, String token) throws ServiceException;
-    void atualizarGenero(GeneroDTO generoEntrada, String token) throws ServiceException;
-    void atualizarIdioma(IdiomaDTO idiomaEntrada, String token) throws ServiceException;
-    void atualizarPais(PaisDTO paisEntrada, String token) throws ServiceException;
+    void atualizarFilme(FilmeDTO filmeEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void atualizarAtor(AtorDTO atorEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void atualizarDiretor(DiretorDTO diretorEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void atualizarGenero(GeneroDTO generoEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void atualizarIdioma(IdiomaDTO idiomaEntrada, String token) throws ServiceException, PersistenciaDawException;
+    void atualizarPais(PaisDTO paisEntrada, String token) throws ServiceException, PersistenciaDawException;
 
     // --- OPERAÇÕES DE EXCLUSÃO (DELETE) ---
 
-    void deletarFilme(Long id, String token) throws ServiceException;
-    void deletarAtor(Long id, String token) throws ServiceException;
-    void deletarDiretor(Long id, String token) throws ServiceException;
-    void deletarGenero(Long id, String token) throws ServiceException;
-    void deletarIdioma(Long id, String token) throws ServiceException;
-    void deletarPais(Long id, String token) throws ServiceException;
+    void deletarFilme(Long id, String token) throws ServiceException, PersistenciaDawException;
+    void deletarAtor(Long id, String token) throws ServiceException, PersistenciaDawException;
+    void deletarDiretor(Long id, String token) throws ServiceException, PersistenciaDawException;
+    void deletarGenero(Long id, String token) throws ServiceException, PersistenciaDawException;
+    void deletarIdioma(Long id, String token) throws ServiceException, PersistenciaDawException;
+    void deletarPais(Long id, String token) throws ServiceException, PersistenciaDawException;
 }
