@@ -1,6 +1,8 @@
 package com.filmchoice.enums;
 
-public enum TipoConexao {
+import com.filmchoice.config.LoadProperties;
+
+public enum TipoConexao implements LoadProperties{
     JDBC("JDBC", "JDBC.properties"),
     MONGODB("MONGODB", "MONGODB.properties"),
     MINIO("MINIO", "MINIO.properties");

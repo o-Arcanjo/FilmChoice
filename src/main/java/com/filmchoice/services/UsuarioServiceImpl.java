@@ -7,7 +7,14 @@ import com.filmchoice.dto.UsuarioDTORecebido;
 import com.filmchoice.entities.Usuario;
 import com.filmchoice.enums.ChaveSecreta;
 import com.filmchoice.mapper.impl.UsuarioMapper;
+
+import java.io.IOException;
+import java.util.Properties;
+
 import org.springframework.stereotype.Service;
+
+import com.filmchoice.config.LoadPropertiesBd;
+import com.filmchoice.enums.CodigoAdmin;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -33,9 +40,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void cadastrarUsuario(UsuarioDTORecebido usuarioDTORecebido) throws ServiceException{
+    public void cadastrarUsuario(UsuarioDTORecebido usuarioDTORecebido) throws ServiceException, IOException{
         if (verificarUsuarioCadastrado(usuarioDTORecebido.getEmail())) {
             throw new ServiceException("Usuário já cadastrado com o e-mail: " + usuarioDTORecebido.getEmail());
+        }
+        Properties props = LoadPropertiesBd.loadProperties(CodigoAdmin.Codigo); 
+        String codigoSecreto = props.getProperty("CODIGO_ADMIN");
+        if(usuarioDTORecebido.getSenha() != null && !usuarioDTORecebido.getSenha().equals(codigoSecreto)){
+
         }
 
         String senhaHash = authService.criptografarSenha(usuarioDTORecebido.getSenha());

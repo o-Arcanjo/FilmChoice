@@ -1,11 +1,20 @@
 package com.filmchoice.controllers;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.filmchoice.config.LoadPropertiesBd;
 import com.filmchoice.dto.UsuarioDTORecebido;
-import com.filmchoice.entities.Usuario;
-import com.filmchoice.response.*;
+import com.filmchoice.enums.Papel;
+import com.filmchoice.response.ErrorResponsee;
+import com.filmchoice.response.TokenResponse;
 import com.filmchoice.services.ServiceException;
 import com.filmchoice.services.UsuarioService;
 
@@ -20,12 +29,25 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("/cadastro")
-    public ResponseEntity<String> criarUsuario(@RequestBody UsuarioDTORecebido usuarioDTO) {
-        try{
+    @PostMapping("/cadastro/admin")
+    public ResponseEntity<String> criarUsuarioAdministrador(@RequestBody UsuarioDTORecebido usuarioDTO) {
+        try{  
+             usuarioDTO.setPapel(Papel.ADMIN);
              usuarioService.cadastrarUsuario(usuarioDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Usuário cadastrado com sucesso!");
-        }catch(ServiceException e){
+            return ResponseEntity.status(HttpStatus.CREATED).body("Usuário administrador cadastrado com sucesso!");
+        }catch(ServiceException | IOException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }   
+    }
+
+
+    @PostMapping("/cadastro/user")
+    public ResponseEntity<String> criarUsuarioComum(@RequestBody UsuarioDTORecebido usuarioDTO) {
+        try{  
+             usuarioDTO.setPapel(Papel.USER);
+             usuarioService.cadastrarUsuario(usuarioDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Usuário comum cadastrado com sucesso!");
+        }catch(ServiceException | IOException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }   
     }

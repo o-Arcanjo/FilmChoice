@@ -1,14 +1,14 @@
 package com.filmchoice.services;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.filmchoice.enums.ChaveSecreta;
+
 
 @Service
 public class AuthServicesImpl extends AuthServiceImplAbstract<TokenService> {
     private final BCryptPasswordEncoder encoder;
 
-     public AuthServicesImpl(TokenService tokenService, ChaveSecreta chave) {
-        super(tokenService, chave);  
+     public AuthServicesImpl(TokenService tokenService) {
+        super(tokenService);  
         this.encoder = new BCryptPasswordEncoder();
     }
 

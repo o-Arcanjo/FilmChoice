@@ -1,14 +1,11 @@
 package com.filmchoice.config;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.filmchoice.enums.TipoConexao;
-
-import java.io.IOException;
-
 public final class LoadPropertiesBd{
     private LoadPropertiesBd(){};
-    public static Properties loadProperties(TipoConexao conexao) throws IOException {
+    public static<T extends LoadProperties> Properties loadProperties(T conexao) throws IOException {
         Properties props = new Properties();
         String path = conexao.getArquivoProperties();
        try(InputStream input = LoadPropertiesBd.class.getResourceAsStream(path)){

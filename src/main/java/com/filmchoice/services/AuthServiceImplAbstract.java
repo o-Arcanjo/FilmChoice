@@ -1,6 +1,4 @@
 package com.filmchoice.services;
-import com.filmchoice.dto.Payload;
-import com.filmchoice.enums.ChaveSecreta;
 import com.filmchoice.services.chains.ConstruirCadeiaHandlerToken;
 import com.filmchoice.services.chains.Handler;
 import com.filmchoice.services.chains.ValidarAssinaturaTokenHandler;
