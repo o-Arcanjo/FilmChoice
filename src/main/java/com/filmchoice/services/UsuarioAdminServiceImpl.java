@@ -91,10 +91,17 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Transactional
     public void atualizarFilme(FilmeDTO filmeDTO, String token) throws ServiceException, PersistenciaDawException {
         validarTokenAdmin(token);
-        Filme filme = filmeRepository.buscarPorId(filmeDTO.getId())
+        Filme filmeExistente = filmeRepository.buscarPorId(filmeDTO.getId())
                 .orElseThrow(() -> new ServiceException("Filme não encontrado"));
-        filmeMapper.updateEntityFromDTO(filmeDTO, filme);
-        filmeRepository.atualizar(filme);
+
+        // Atualiza apenas os campos permitidos
+        Filme filmeAtualizado = filmeMapper.converterElementoEntidade(filmeDTO);
+        filmeExistente.setTitulo(filmeAtualizado.getTitulo());
+        filmeExistente.setAnoLancamento(filmeAtualizado.getAnoLancamento());
+        filmeExistente.setDuracao(filmeAtualizado.getDuracao());
+        filmeExistente.setSinopse(filmeAtualizado.getSinopse());
+
+        filmeRepository.atualizar(filmeExistente);
     }
 
     @Override
@@ -128,10 +135,14 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Transactional
     public void atualizarAtor(AtorDTO atorDTO, String token) throws ServiceException, PersistenciaDawException {
         validarTokenAdmin(token);
-        Ator ator = atorRepository.buscarPorId(atorDTO.getId())
+        Ator atorExistente = atorRepository.buscarPorId(atorDTO.getId())
                 .orElseThrow(() -> new ServiceException("Ator não encontrado"));
-        atorMapper.updateEntityFromDTO(atorDTO, ator);
-        atorRepository.atualizar(ator);
+
+        Ator atorAtualizado = atorMapper.converterElementoEntidade(atorDTO);
+        atorExistente.setNome(atorAtualizado.getNome());
+        atorExistente.setDataNascimento(atorAtualizado.getDataNascimento());
+
+        atorRepository.atualizar(atorExistente);
     }
 
     @Override
@@ -165,10 +176,14 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Transactional
     public void atualizarDiretor(DiretorDTO diretorDTO, String token) throws ServiceException, PersistenciaDawException {
         validarTokenAdmin(token);
-        Diretor diretor = diretorRepository.buscarPorId(diretorDTO.getId())
+        Diretor diretorExistente = diretorRepository.buscarPorId(diretorDTO.getId())
                 .orElseThrow(() -> new ServiceException("Diretor não encontrado"));
-        diretorMapper.updateEntityFromDTO(diretorDTO, diretor);
-        diretorRepository.atualizar(diretor);
+
+        Diretor diretorAtualizado = diretorMapper.converterElementoEntidade(diretorDTO);
+        diretorExistente.setNome(diretorAtualizado.getNome());
+        diretorExistente.setDataNascimento(diretorAtualizado.getDataNascimento());
+
+        diretorRepository.atualizar(diretorExistente);
     }
 
     @Override
@@ -202,10 +217,13 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Transactional
     public void atualizarGenero(GeneroDTO generoDTO, String token) throws ServiceException, PersistenciaDawException {
         validarTokenAdmin(token);
-        Genero genero = generoRepository.buscarPorId(generoDTO.getId())
+        Genero generoExistente = generoRepository.buscarPorId(generoDTO.getId())
                 .orElseThrow(() -> new ServiceException("Gênero não encontrado"));
-        generoMapper.updateEntityFromDTO(generoDTO, genero);
-        generoRepository.atualizar(genero);
+
+        Genero generoAtualizado = generoMapper.converterElementoEntidade(generoDTO);
+        generoExistente.setNome(generoAtualizado.getNome());
+
+        generoRepository.atualizar(generoExistente);
     }
 
     @Override
@@ -239,10 +257,13 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Transactional
     public void atualizarIdioma(IdiomaDTO idiomaDTO, String token) throws ServiceException, PersistenciaDawException {
         validarTokenAdmin(token);
-        Idioma idioma = idiomaRepository.buscarPorId(idiomaDTO.getId())
+        Idioma idiomaExistente = idiomaRepository.buscarPorId(idiomaDTO.getId())
                 .orElseThrow(() -> new ServiceException("Idioma não encontrado"));
-        idiomaMapper.updateEntityFromDTO(idiomaDTO, idioma);
-        idiomaRepository.atualizar(idioma);
+
+        Idioma idiomaAtualizado = idiomaMapper.converterElementoEntidade(idiomaDTO);
+        idiomaExistente.setNome(idiomaAtualizado.getNome());
+
+        idiomaRepository.atualizar(idiomaExistente);
     }
 
     @Override
@@ -276,10 +297,14 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Transactional
     public void atualizarPais(PaisDTO paisDTO, String token) throws ServiceException, PersistenciaDawException {
         validarTokenAdmin(token);
-        Pais pais = paisRepository.buscarPorId(paisDTO.getId())
+        Pais paisExistente = paisRepository.buscarPorId(paisDTO.getId())
                 .orElseThrow(() -> new ServiceException("País não encontrado"));
-        paisMapper.updateEntityFromDTO(paisDTO, pais);
-        paisRepository.atualizar(pais);
+
+        Pais paisAtualizado = paisMapper.converterElementoEntidade(paisDTO);
+        paisExistente.setNome(paisAtualizado.getNome());
+        paisExistente.setSigla(paisAtualizado.getSigla());
+
+        paisRepository.atualizar(paisExistente);
     }
 
     @Override
