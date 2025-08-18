@@ -38,24 +38,4 @@ public class IdiomaMapper implements Converter<IdiomaDTO, Idioma> {
         // Relacionamentos são tratados separadamente
         return idioma;
     }
-
-    @Override
-    public void updateEntityFromDTO(IdiomaDTO dto, Idioma entity) {
-        if (dto.getTipo() != null) {
-            entity.setTipo(dto.getTipo());
-        }
-    }
-
-    // Método para DTO completo com filmes relacionados
-    public IdiomaDTO toFullDTO(Idioma idioma) {
-        IdiomaDTO dto = converterElementoDTO(idioma);
-
-        if (idioma.getFilmes() != null) {
-            dto.setFilmes(idioma.getFilmes().stream()
-                    .map(filmeMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        return dto;
-    }
 }

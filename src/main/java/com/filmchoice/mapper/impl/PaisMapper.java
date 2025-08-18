@@ -37,33 +37,4 @@ public class PaisMapper implements Converter<PaisDTO, Pais> {
         pais.setSigla(paisDTO.getSigla());
         return pais;
     }
-
-    @Override
-    public void updateEntityFromDTO(PaisDTO dto, Pais entity) {
-        if (dto.getNome() != null) {
-            entity.setNome(dto.getNome());
-        }
-        if (dto.getSigla() != null) {
-            entity.setSigla(dto.getSigla());
-        }
-    }
-
-    // Método para DTO detalhado com relacionamentos
-    public PaisDTO toFullDTO(Pais pais) {
-        PaisDTO dto = converterElementoDTO(pais);
-
-        if (pais.getAtores() != null) {
-            dto.setAtores(pais.getAtores().stream()
-                    .map(atorMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        if (pais.getDiretores() != null) {
-            dto.setDiretores(pais.getDiretores().stream()
-                    .map(diretorMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        return dto;
-    }
 }

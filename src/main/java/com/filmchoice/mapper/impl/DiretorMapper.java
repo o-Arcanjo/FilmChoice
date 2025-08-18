@@ -54,37 +54,4 @@ public class DiretorMapper implements Converter<DiretorDTO, Diretor> {
 
         return diretor;
     }
-
-    @Override
-    public void updateEntityFromDTO(DiretorDTO dto, Diretor entity) {
-        if (dto.getNome() != null) {
-            entity.setNome(dto.getNome());
-        }
-        if (dto.getDataNascimento() != null) {
-            entity.setDataNascimento(dto.getDataNascimento());
-        }
-        // País só atualiza se fornecido no DTO
-        if (dto.getPaisId() != null) {
-            Pais pais = new Pais();
-            pais.setId(dto.getPaisId());
-            entity.setPais(pais);
-        }
-    }
-
-    // Método para DTO detalhado (com objetos completos)
-    public DiretorDTO toFullDTO(Diretor diretor) {
-        DiretorDTO dto = converterElementoDTO(diretor);
-
-        if (diretor.getPais() != null) {
-            dto.setPais(paisMapper.converterElementoDTO(diretor.getPais()));
-        }
-
-        if (diretor.getFilmes() != null) {
-            dto.setFilmes(diretor.getFilmes().stream()
-                    .map(filmeMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        return dto;
-    }
 }

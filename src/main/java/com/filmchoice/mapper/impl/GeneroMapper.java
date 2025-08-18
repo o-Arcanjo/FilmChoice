@@ -38,24 +38,4 @@ public class GeneroMapper implements Converter<GeneroDTO, Genero> {
         // Relacionamentos são tratados separadamente
         return genero;
     }
-
-    @Override
-    public void updateEntityFromDTO(GeneroDTO dto, Genero entity) {
-        if (dto.getTipo() != null) {
-            entity.setTipo(dto.getTipo());
-        }
-    }
-
-    // Método para DTO completo com filmes relacionados
-    public GeneroDTO toFullDTO(Genero genero) {
-        GeneroDTO dto = converterElementoDTO(genero);
-
-        if (genero.getFilmes() != null) {
-            dto.setFilmes(genero.getFilmes().stream()
-                    .map(filmeMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        return dto;
-    }
 }

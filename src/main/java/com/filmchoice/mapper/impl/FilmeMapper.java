@@ -69,48 +69,4 @@ public class FilmeMapper implements Converter<FilmeDTO, Filme> {
         // Relacionamentos são tratados separadamente
         return filme;
     }
-
-    @Override
-    public void updateEntityFromDTO(FilmeDTO dto, Filme entity) {
-        if (dto.getTitulo() != null) {
-            entity.setTitulo(dto.getTitulo());
-        }
-        if (dto.getDuracaoMinutos() != null) {
-            entity.setDuracaoMinutos(dto.getDuracaoMinutos());
-        }
-        if (dto.getReceita() != null) {
-            entity.setReceita(dto.getReceita());
-        }
-    }
-
-    // Método para DTO completo com todos os relacionamentos
-    public FilmeDTO toFullDTO(Filme filme) {
-        FilmeDTO dto = converterElementoDTO(filme);
-
-        if (filme.getAtores() != null) {
-            dto.setAtores(filme.getAtores().stream()
-                    .map(atorMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        if (filme.getDiretores() != null) {
-            dto.setDiretores(filme.getDiretores().stream()
-                    .map(diretorMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        if (filme.getGeneros() != null) {
-            dto.setGeneros(filme.getGeneros().stream()
-                    .map(generoMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        if (filme.getIdiomas() != null) {
-            dto.setIdiomas(filme.getIdiomas().stream()
-                    .map(idiomaMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-
-        return dto;
-    }
 }

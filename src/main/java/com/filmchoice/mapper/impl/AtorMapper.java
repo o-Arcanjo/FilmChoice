@@ -54,35 +54,4 @@ public class AtorMapper implements Converter<AtorDTO, Ator> {
 
         return ator;
     }
-
-    // Método opcional para atualização parcial
-    @Override
-    public void updateEntityFromDTO(AtorDTO dto, Ator entity) {
-        if (dto.getNome() != null) {
-            entity.setNome(dto.getNome());
-        }
-        if (dto.getDataNascimento() != null) {
-            entity.setDataNascimento(dto.getDataNascimento());
-        }
-        // País só atualiza se fornecido no DTO
-        if (dto.getPaisId() != null) {
-            Pais pais = new Pais();
-            pais.setId(dto.getPaisId());
-            entity.setPais(pais);
-        }
-    }
-
-    // Método adicional para mapeamento completo (com filmes)
-    public AtorDTO toFullDTO(Ator ator) {
-        AtorDTO dto = converterElementoDTO(ator);
-        if (ator.getFilmes() != null) {
-            dto.setFilmes(ator.getFilmes().stream()
-                    .map(filmeMapper::converterElementoDTO)
-                    .collect(Collectors.toList()));
-        }
-        if (ator.getPais() != null) {
-            dto.setPais(paisMapper.converterElementoDTO(ator.getPais()));
-        }
-        return dto;
-    }
 }
