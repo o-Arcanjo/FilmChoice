@@ -43,6 +43,20 @@
             <version>4.11.2</version>
         </dependency>
 
+
+<dependency>
+    <groupId>org.hibernate.orm</groupId>
+    <artifactId>hibernate-spatial</artifactId>
+    <version>${hibernate.version}</version>
+</dependency>
+
+
+<dependency>
+    <groupId>org.locationtech.jts</groupId>
+    <artifactId>jts-core</artifactId>
+    <version>1.19.0</version>
+</dependency>
+
         <!-- MinIO -->
         <dependency>
             <groupId>io.minio</groupId>

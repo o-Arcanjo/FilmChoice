@@ -1,4 +1,4 @@
-package com.filmchoice.mapper.impl;
+/*package com.filmchoice.mapper.impl;
 
 import com.filmchoice.dto.GeneroDTO;
 import com.filmchoice.entities.Genero;
@@ -39,3 +39,5 @@ public class GeneroMapper implements Converter<GeneroDTO, Genero> {
         return genero;
     }
 }
+
+*/

@@ -1,4 +1,4 @@
-package com.filmchoice.mapper.impl;
+/*package com.filmchoice.mapper.impl;
 
 import com.filmchoice.dto.DiretorDTO;
 import com.filmchoice.entities.Diretor;
@@ -55,3 +55,5 @@ public class DiretorMapper implements Converter<DiretorDTO, Diretor> {
         return diretor;
     }
 }
+
+*/

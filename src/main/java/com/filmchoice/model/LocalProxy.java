@@ -3,11 +3,11 @@ import java.util.List;
 import com.google.common.base.Supplier;
 
 public class LocalProxy implements LocalInterface {
-    private final Supplier<Local> supplier;
+    private final Supplier<LocalModel> supplier;
     private LocalReal localReal;
 
 
-    public LocalProxy(Supplier<Local> supplier){
+    public LocalProxy(Supplier<LocalModel> supplier){
         this.supplier = supplier;
     }
 

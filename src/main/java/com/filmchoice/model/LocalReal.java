@@ -3,8 +3,8 @@ package com.filmchoice.model;
 import java.util.List;
 
 public class LocalReal implements LocalInterface{
-    private final Local local;
-    public LocalReal(Local local) {
+    private final LocalModel local;
+    public LocalReal(LocalModel local) {
         this.local = local;
     }
 

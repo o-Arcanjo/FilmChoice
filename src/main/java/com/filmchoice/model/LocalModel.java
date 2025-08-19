@@ -1,12 +1,12 @@
 package com.filmchoice.model;
 import java.util.List;
 
-public class Local implements LocalInterface{
+public class LocalModel implements LocalInterface{
     private final List<Double> coordenadas;
     private final String imagemUrl;
     private final String nomeImagem;
 
-    private Local(Builder builder) {
+    private LocalModel(Builder builder) {
         this.coordenadas = builder.coordenadas;
         this.imagemUrl = builder.imagemUrl;
         this.nomeImagem = builder.nomeImagem;
@@ -48,8 +48,8 @@ public class Local implements LocalInterface{
             return this;
         }
 
-        public Local build() {
-            return new Local(this);
+        public LocalModel build() {
+            return new LocalModel(this);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.filmchoice.mapper.impl;
+/*package com.filmchoice.mapper.impl;
 
 import com.filmchoice.dto.PaisDTO;
 import com.filmchoice.entities.Pais;
@@ -38,3 +38,6 @@ public class PaisMapper implements Converter<PaisDTO, Pais> {
         return pais;
     }
 }
+
+
+*/

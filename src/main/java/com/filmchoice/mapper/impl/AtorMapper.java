@@ -1,4 +1,4 @@
-package com.filmchoice.mapper.impl;
+/*package com.filmchoice.mapper.impl;
 
 import com.filmchoice.dto.AtorDTO;
 import com.filmchoice.entities.Ator;
@@ -55,3 +55,6 @@ public class AtorMapper implements Converter<AtorDTO, Ator> {
         return ator;
     }
 }
+
+
+*/

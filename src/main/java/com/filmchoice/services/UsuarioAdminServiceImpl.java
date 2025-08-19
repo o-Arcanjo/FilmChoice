@@ -1,4 +1,4 @@
-package com.filmchoice.services;
+/*package com.filmchoice.services;
 
 import com.filmchoice.dao.*;
 import com.filmchoice.dto.*;
@@ -317,3 +317,5 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
         paisRepository.deletar(id);
     }
 }
+
+*/
