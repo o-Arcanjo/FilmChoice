@@ -1,12 +1,7 @@
 package com.filmchoice.services;
 
 import com.filmchoice.dao.PersistenciaDawException; // Importar a exceção
-import com.filmchoice.dto.AtorDTO;
-import com.filmchoice.dto.DiretorDTO;
-import com.filmchoice.dto.FilmeDTO;
-import com.filmchoice.dto.GeneroDTO;
-import com.filmchoice.dto.IdiomaDTO;
-import com.filmchoice.dto.PaisDTO;
+import com.filmchoice.dto.*;
 
 import java.util.List;
 

@@ -4,13 +4,7 @@ import java.util.List;
 
 import com.filmchoice.dao.PersistenciaDawException;
 import com.filmchoice.dao.UsuarioDAO;
-import com.filmchoice.dto.AtorDTO;
-import com.filmchoice.dto.DiretorDTO;
-import com.filmchoice.dto.FilmeDTO;
-import com.filmchoice.dto.GeneroDTO;
-import com.filmchoice.dto.IdiomaDTO;
-import com.filmchoice.dto.PaisDTO;
-import com.filmchoice.dto.Payload;
+import com.filmchoice.dto.*;
 import com.filmchoice.entities.Usuario;
 import com.filmchoice.enums.ChaveSecreta;
 import com.filmchoice.enums.Papel;

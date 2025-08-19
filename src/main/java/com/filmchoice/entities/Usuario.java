@@ -23,6 +23,7 @@ import jakarta.persistence.UniqueConstraint;
         @UniqueConstraint(name = "EMAIL_USER", columnNames = { "Email" })
 })
 public class Usuario {
+
     @Id
     @GeneratedValue(generator = "jpa_usuario_seq")
     @SequenceGenerator(name = "jpa_usuario_seq", sequenceName = "usuario_id_seq")
@@ -34,7 +35,7 @@ public class Usuario {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "senha", nullable = false)
+    @Column(name = "senha", nullable = false, length = 60)
     private String senha;
 
     @Column(name = "dataCriacao", nullable = false, updatable = false)
@@ -50,73 +51,91 @@ public class Usuario {
     @Transient
     private Integer idade;
 
+    // 🔹 Construtor padrão para JPA
     public Usuario() {
+        this.dataCriacao = LocalDate.now();
     }
 
-    private Usuario(Builder builder) {
-        this.id = builder.id;
-        this.nome = builder.nome;
-        this.senha = builder.senha;
-        this.dataCriacao = builder.dataCriacao != null ? builder.dataCriacao : LocalDate.now();
-        this.email = builder.email;
-        this.papel = builder.papel;
-        this.idade = builder.idade;
+    // 🔹 Construtor completo opcional
+    public Usuario(String nome, String senha, String email, Papel papel, Integer idade) {
+        this.nome = nome;
+        this.senha = senha;
+        this.dataCriacao = LocalDate.now();
+        this.email = email;
+        this.papel = papel;
+        this.idade = idade;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    // 🔹 Getters e Setters
+    public Long getId() {
+        return id;
     }
 
-    public static class Builder {
-        private Long id;
-        private String nome;
-        private String senha;
-        private LocalDate dataCriacao;
-        private String email;
-        private Papel papel;
-        private Integer idade;
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder nome(String nome) {
-            this.nome = nome;
-            return this;
-        }
-
-        public Builder senha(String senha) {
-            this.senha = senha;
-            return this;
-        }
-
-        public Builder dataCriacao(LocalDate dataCriacao) {
-            this.dataCriacao = dataCriacao;
-            return this;
-        }
-
-        public Builder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public Builder papel(Papel papel) {
-            this.papel = papel;
-            return this;
-        }
-
-        public Usuario build() {
-            return new Usuario(this);
-        }
+    public void setId(Long id) {
+        this.id = id;
     }
 
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Papel getPapel() {
+        return papel;
+    }
+
+    public void setPapel(Papel papel) {
+        this.papel = papel;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    // 🔹 equals e hashCode baseados em id
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
         Usuario usuario = (Usuario) o;
         return id != null && id.equals(usuario.id);
     }
@@ -126,42 +145,16 @@ public class Usuario {
         return Objects.hash(id);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public LocalDate getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Papel getPapel() {
-        return papel;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
+    // 🔹 toString
     @Override
     public String toString() {
-        return "Usuario{ " +
-                "id= " + id +
-                ", Nome= " + nome +
-                ", Data_Nascimento= " + dataCriacao +
-                ", Senha= " + senha +
-                ", Email= " + email +
-                " }";
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", dataCriacao=" + dataCriacao +
+                ", senha='" + senha + '\'' +
+                ", email='" + email + '\'' +
+                ", papel=" + papel +
+                '}';
     }
 }

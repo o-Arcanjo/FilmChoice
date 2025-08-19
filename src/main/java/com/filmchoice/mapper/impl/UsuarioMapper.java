@@ -21,11 +21,18 @@ public class UsuarioMapper implements Converter<UsuarioDTO, Usuario> {
 
     @Override
     public Usuario converterElementoEntidade(UsuarioDTO usuarioDTO) {
-        return Usuario.builder()
-                .nome(usuarioDTO.getNome())
-                .email(usuarioDTO.getEmail())
-                .papel(usuarioDTO.getPapel())
-                .senha(usuarioDTO.getSenha())
-                .build();
+        Usuario usuario = new Usuario(); 
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setSenha(usuarioDTO.getSenha());
+        usuario.setPapel(usuarioDTO.getPapel());
+        return usuario;
     }
+
+    @Override
+    public UsuarioDTO toFullDTO(Usuario elemento) {
+        return converterElementoDTO(elemento);
+    }
+    
+
 }
