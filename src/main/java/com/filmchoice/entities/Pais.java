@@ -7,7 +7,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Pais")
-
 public class Pais {
 
     @Id
@@ -36,29 +35,21 @@ public class Pais {
         this.sigla = sigla;
     }
 
-    public Long getId() {
-        return id;
-    }
+    // Getters e setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public String getNome() {
-        return nome;
-    }
+    public String getSigla() { return sigla; }
+    public void setSigla(String sigla) { this.sigla = sigla; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public List<Ator> getAtores() { return atores; }
+    public void setAtores(List<Ator> atores) { this.atores = atores; }
 
-    public String getSigla() {
-        return sigla;
-    }
-
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
-    }
+    public List<Diretor> getDiretores() { return diretores; }
+    public void setDiretores(List<Diretor> diretores) { this.diretores = diretores; }
 
     @Override
     public boolean equals(Object o) {
@@ -69,9 +60,8 @@ public class Pais {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+    public int hashCode() { return Objects.hash(id); }
+
     @Override
     public String toString() {
         return "Pais{" +
@@ -81,3 +71,4 @@ public class Pais {
                 '}';
     }
 }
+

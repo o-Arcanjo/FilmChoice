@@ -52,6 +52,39 @@ public class Filme {
         this.id = id;
     }
 
+
+    public List<Ator> getAtores() {
+        return ator;
+    }
+    
+    public void setAtores(List<Ator> ator) {
+        this.ator = ator;
+    }
+    
+    public List<Diretor> getDiretores() {
+        return diretor;
+    }
+    
+    public void setDiretores(List<Diretor> diretor) {
+        this.diretor = diretor;
+    }
+    
+    public List<Genero> getGeneros() {
+        return genero;
+    }
+    
+    public void setGeneros(List<Genero> genero) {
+        this.genero = genero;
+    }
+    
+    public List<Idioma> getIdiomas() {
+        return idioma;
+    }
+    
+    public void setIdiomas(List<Idioma> idioma) {
+        this.idioma = idioma;
+    }
+
     public String getTitulo() {
         return titulo;
     }

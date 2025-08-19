@@ -43,12 +43,24 @@ public class Genero {
         return id;
     }
 
+    public void setId(Long id) {    // Adicionado setter
+        this.id = id;
+    }
+
     public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public List<Filme> getFilmes() {
+        return filmes;
+    }
+
+    public void setFilmes(List<Filme> filmes) {
+        this.filmes = filmes;
     }
 
     @Override
@@ -72,3 +84,4 @@ public class Genero {
         return Objects.hash(id, tipo);
     }
 }
+

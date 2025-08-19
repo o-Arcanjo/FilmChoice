@@ -54,6 +54,13 @@ public class Diretor {
         return nome;
     }
 
+    public Pais getPais(){
+        return pais;
+    }
+
+    public List<Filme> getFilmes(){
+        return filmes;
+    }
     public void setNome(String nome) {
         this.nome = nome;
     }

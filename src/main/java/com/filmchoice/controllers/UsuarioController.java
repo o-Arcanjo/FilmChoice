@@ -1,14 +1,11 @@
 package com.filmchoice.controllers;
 
 import java.io.IOException;
-import java.util.Properties;
-
+import java.util.List;
 import com.filmchoice.entities.Usuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.filmchoice.config.LoadPropertiesBd;
 import com.filmchoice.dto.UsuarioDTORecebido;
 import com.filmchoice.enums.Papel;
 import com.filmchoice.response.ErrorResponsee;
@@ -71,7 +68,6 @@ public class UsuarioController {
         }
     }
 
-    // GET BY ID - Buscar usuário por ID
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarUsuarioPorId(@PathVariable Long id) {
         try {
@@ -83,7 +79,6 @@ public class UsuarioController {
         }
     }
 
-    // GET BY EMAIL - Buscar usuário por email
     @GetMapping("/email/{email}")
     public ResponseEntity<?> buscarUsuarioPorEmail(@PathVariable String email) {
         try {
@@ -95,7 +90,6 @@ public class UsuarioController {
         }
     }
 
-    // PUT - Atualizar usuário
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTORecebido usuarioDTO) {
         try {
@@ -105,13 +99,12 @@ public class UsuarioController {
 
             Usuario usuarioAtualizado = usuarioService.atualizarUsuario(id, usuarioDTO);
             return ResponseEntity.ok(usuarioAtualizado);
-        } catch (ServiceException | IOException e) {
+        } catch (ServiceException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorResponsee(e.getMessage()));
         }
     }
 
-    // DELETE - Deletar usuário
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletarUsuario(@PathVariable Long id) {
         try {
@@ -123,7 +116,6 @@ public class UsuarioController {
         }
     }
 
-    // GET - Verificar se usuário existe por email
     @GetMapping("/verificar-email/{email}")
     public ResponseEntity<?> verificarEmail(@PathVariable String email) {
         try {

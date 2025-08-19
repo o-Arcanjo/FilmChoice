@@ -61,6 +61,13 @@ public class Ator {
         this.id = id;
     }
 
+    public Pais getPais(){
+        return pais;
+    }
+
+    public List<Filme> getFilmes(){
+        return filmes;
+    }
     public String getNome() {
         return nome;
     }

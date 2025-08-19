@@ -7,8 +7,8 @@ public class DiretorDTO {
     private Long id;
     private String nome;
     private LocalDate dataNascimento;
-    private Long paisId;
-    private List<Long> filmesIds;
+    private PaisDTO pais;          // agora é PaisDTO
+    private List<FilmeDTO> filmes; // agora é lista de FilmeDTO
 
     public Long getId() {
         return id;
@@ -22,20 +22,20 @@ public class DiretorDTO {
         return dataNascimento;
     }
 
-    public Long getPaisId() {
-        return paisId;
+    public PaisDTO getPais() {
+        return pais;
     }
 
-    public List<Long> getFilmesIds() {
-        return filmesIds;
+    public List<FilmeDTO> getFilmes() {
+        return filmes;
     }
 
     private DiretorDTO(Builder builder) {
         this.id = builder.id;
         this.nome = builder.nome;
         this.dataNascimento = builder.dataNascimento;
-        this.paisId = builder.paisId;
-        this.filmesIds = builder.filmesIds;
+        this.pais = builder.pais;
+        this.filmes = builder.filmes;
     }
 
     public static Builder builder() {
@@ -46,8 +46,8 @@ public class DiretorDTO {
         private Long id;
         private String nome;
         private LocalDate dataNascimento;
-        private Long paisId;
-        private List<Long> filmesIds;
+        private PaisDTO pais;
+        private List<FilmeDTO> filmes;
 
         public Builder id(Long id) {
             this.id = id;
@@ -64,13 +64,13 @@ public class DiretorDTO {
             return this;
         }
 
-        public Builder paisId(Long paisId) {
-            this.paisId = paisId;
+        public Builder pais(PaisDTO pais) {
+            this.pais = pais;
             return this;
         }
 
-        public Builder filmesIds(List<Long> filmesIds) {
-            this.filmesIds = filmesIds;
+        public Builder filmes(List<FilmeDTO> filmes) {
+            this.filmes = filmes;
             return this;
         }
 

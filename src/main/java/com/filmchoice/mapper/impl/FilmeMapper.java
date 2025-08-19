@@ -1,14 +1,9 @@
-/*package com.filmchoice.mapper.impl;
-
+package com.filmchoice.mapper.impl;
 import com.filmchoice.dto.FilmeDTO;
 import com.filmchoice.entities.*;
 import com.filmchoice.mapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -34,26 +29,6 @@ public class FilmeMapper implements Converter<FilmeDTO, Filme> {
                 .lancamento(filme.getLancamento())
                 .duracaoMinutos(filme.getDuracaoMinutos())
                 .receita(filme.getReceita())
-                .atoresIds(filme.getAtores() != null ?
-                        filme.getAtores().stream()
-                                .map(Ator::getId)
-                                .collect(Collectors.toList())
-                        : null)
-                .diretoresIds(filme.getDiretores() != null ?
-                        filme.getDiretores().stream()
-                                .map(Diretor::getId)
-                                .collect(Collectors.toList())
-                        : null)
-                .generosIds(filme.getGeneros() != null ?
-                        filme.getGeneros().stream()
-                                .map(Genero::getId)
-                                .collect(Collectors.toList())
-                        : null)
-                .idiomasIds(filme.getIdiomas() != null ?
-                        filme.getIdiomas().stream()
-                                .map(Idioma::getId)
-                                .collect(Collectors.toList())
-                        : null)
                 .build();
     }
 
@@ -66,9 +41,47 @@ public class FilmeMapper implements Converter<FilmeDTO, Filme> {
         filme.setDuracaoMinutos(filmeDTO.getDuracaoMinutos());
         filme.setReceita(filmeDTO.getReceita());
 
-        // Relacionamentos são tratados separadamente
         return filme;
     }
+
+    @Override
+public FilmeDTO toFullDTO(Filme filme) {
+    return FilmeDTO.builder()
+            .id(filme.getId())
+            .titulo(filme.getTitulo())
+            .lancamento(filme.getLancamento())
+            .duracaoMinutos(filme.getDuracaoMinutos())
+            .receita(filme.getReceita())
+            .atores(
+                filme.getAtores() != null
+                    ? filme.getAtores().stream()
+                        .map(atorMapper::converterElementoDTO)
+                        .collect(Collectors.toList())
+                    : null
+            )
+            .diretores(
+                filme.getDiretores() != null
+                    ? filme.getDiretores().stream()
+                        .map(diretorMapper::converterElementoDTO)
+                        .collect(Collectors.toList())
+                    : null
+            )
+            .generos(
+                filme.getGeneros() != null
+                    ? filme.getGeneros().stream()
+                        .map(generoMapper::converterElementoDTO)
+                        .collect(Collectors.toList())
+                    : null
+            )
+            .idiomas(
+                filme.getIdiomas() != null
+                    ? filme.getIdiomas().stream()
+                        .map(idiomaMapper::converterElementoDTO)
+                        .collect(Collectors.toList())
+                    : null
+            )
+            .build();
 }
 
-*/
+}
+

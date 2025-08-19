@@ -1,4 +1,4 @@
-/*package com.filmchoice.mapper.impl;
+package com.filmchoice.mapper.impl;
 
 import com.filmchoice.dto.IdiomaDTO;
 import com.filmchoice.entities.Idioma;
@@ -21,11 +21,6 @@ public class IdiomaMapper implements Converter<IdiomaDTO, Idioma> {
         return IdiomaDTO.builder()
                 .id(idioma.getId())
                 .tipo(idioma.getTipo())
-                .filmesIds(idioma.getFilmes() != null ?
-                        idioma.getFilmes().stream()
-                                .map(Filme::getId)
-                                .collect(Collectors.toList())
-                        : null)
                 .build();
     }
 
@@ -34,11 +29,21 @@ public class IdiomaMapper implements Converter<IdiomaDTO, Idioma> {
         Idioma idioma = new Idioma();
         idioma.setId(idiomaDTO.getId());
         idioma.setTipo(idiomaDTO.getTipo());
-
-        // Relacionamentos são tratados separadamente
         return idioma;
+    }
+
+    @Override
+    public IdiomaDTO toFullDTO(Idioma idioma) {
+        return IdiomaDTO.builder()
+        .id(idioma.getId())
+        .tipo(idioma.getTipo())
+        .filmes(idioma.getFilmes() != null
+        ? idioma.getFilmes().stream()
+                .map(filmeMapper::converterElementoDTO)
+                .collect(Collectors.toList())
+        : null)
+        .build();
     }
 }
 
 
-*/

@@ -1,24 +1,19 @@
-/*package com.filmchoice.mapper.impl;
-
+package com.filmchoice.mapper.impl;
 import com.filmchoice.dto.AtorDTO;
 import com.filmchoice.entities.Ator;
-import com.filmchoice.entities.Filme;
-import com.filmchoice.entities.Pais;
 import com.filmchoice.mapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class AtorMapper implements Converter<AtorDTO, Ator> {
 
     @Autowired
-    private FilmeMapper filmeMapper; // Para mapear filmes se necessário
+    private FilmeMapper filmeMapper; 
 
     @Autowired
-    private PaisMapper paisMapper; // Para mapear país
+    private PaisMapper paisMapper;
 
     @Override
     public AtorDTO converterElementoDTO(Ator ator) {
@@ -26,12 +21,6 @@ public class AtorMapper implements Converter<AtorDTO, Ator> {
                 .id(ator.getId())
                 .nome(ator.getNome())
                 .dataNascimento(ator.getDataNascimento())
-                .paisId(ator.getPais() != null ? ator.getPais().getId() : null)
-                .filmesIds(ator.getFilmes() != null ?
-                        ator.getFilmes().stream()
-                                .map(Filme::getId)
-                                .collect(Collectors.toList())
-                        : null)
                 .build();
     }
 
@@ -42,19 +31,30 @@ public class AtorMapper implements Converter<AtorDTO, Ator> {
         ator.setNome(atorDTO.getNome());
         ator.setDataNascimento(atorDTO.getDataNascimento());
 
-        // Mapeamento do País (apenas ID)
-        if (atorDTO.getPaisId() != null) {
-            Pais pais = new Pais();
-            pais.setId(atorDTO.getPaisId());
-            ator.setPais(pais);
-        }
-
-        // Nota: Filmes são geralmente adicionados via operação separada
-        // para evitar carga desnecessária durante conversão
-
         return ator;
     }
+
+    @Override
+public AtorDTO toFullDTO(Ator ator) {
+    return AtorDTO.builder()
+            .id(ator.getId())
+            .nome(ator.getNome())
+            .dataNascimento(ator.getDataNascimento())
+            .filmes(
+                ator.getFilmes() != null
+                    ? ator.getFilmes().stream()
+                        .map(filmeMapper::converterElementoDTO) 
+                        .collect(Collectors.toList())
+                    : null
+            )
+            .pais(
+                ator.getPais() != null 
+                    ? paisMapper.converterElementoDTO(ator.getPais()) 
+                    : null
+            )
+            .build();
+}
+
 }
 
 
-*/

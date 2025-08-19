@@ -1,6 +1,6 @@
 package com.filmchoice.entities;
+
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ public class Idioma {
 
     @Id
     @GeneratedValue(generator = "jpa_idioma_seq")
-    @SequenceGenerator(name = "jpa_idioma_seq", sequenceName = "idioma_id_seq",  allocationSize = 1 )
+    @SequenceGenerator(name = "jpa_idioma_seq", sequenceName = "idioma_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "tipo", nullable = false)
@@ -18,16 +18,18 @@ public class Idioma {
 
     @ManyToMany
     @JoinTable(name="idioma_id",
-                joinColumns = @JoinColumn(name="idioma_id"), 
-                inverseJoinColumns = @JoinColumn(name="filme_id")
-                )
+            joinColumns = @JoinColumn(name="idioma_id"), 
+            inverseJoinColumns = @JoinColumn(name="filme_id")
+    )
     private List<Filme> filmes;
 
-    public Idioma(){};
+    public Idioma() {}
+
     public Idioma(String tipo) {
         this.tipo = tipo;
     }
 
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -42,6 +44,14 @@ public class Idioma {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public List<Filme> getFilmes() {
+        return filmes;
+    }
+
+    public void setFilmes(List<Filme> filmes) {
+        this.filmes = filmes;
     }
 
     @Override

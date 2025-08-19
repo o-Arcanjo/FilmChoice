@@ -1,14 +1,11 @@
-/*package com.filmchoice.mapper.impl;
+package com.filmchoice.mapper.impl;
 
 import com.filmchoice.dto.PaisDTO;
 import com.filmchoice.entities.Pais;
-import com.filmchoice.entities.Ator;
-import com.filmchoice.entities.Diretor;
 import com.filmchoice.mapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -37,7 +34,30 @@ public class PaisMapper implements Converter<PaisDTO, Pais> {
         pais.setSigla(paisDTO.getSigla());
         return pais;
     }
+
+    @Override
+public PaisDTO toFullDTO(Pais pais) {
+    return PaisDTO.builder()
+            .id(pais.getId())
+            .nome(pais.getNome())
+            .sigla(pais.getSigla())
+            .atores(
+                pais.getAtores() != null
+                    ? pais.getAtores().stream()
+                        .map(atorMapper::converterElementoDTO)
+                        .collect(Collectors.toList())
+                    : null
+            )
+            .diretores(
+                pais.getDiretores() != null
+                    ? pais.getDiretores().stream()
+                        .map(diretorMapper::converterElementoDTO)
+                        .collect(Collectors.toList())
+                    : null
+            )
+            .build();
+}
+
 }
 
 
-*/
