@@ -3,6 +3,7 @@ package com.filmchoice.controllers;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import com.filmchoice.entities.Usuario;
 
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,13 @@ import com.filmchoice.response.TokenResponse;
 import com.filmchoice.services.ServiceException;
 import com.filmchoice.services.UsuarioService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/usuario")
+@Api(value = "Usuário Controller", tags = {"Usuários"})
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -29,6 +34,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastro/admin")
+    @ApiOperation(value = "Cadastrar usuário administrador",
+            notes = "Cadastra um usuário com papel de administrador. O papel é atribuído automaticamente como ADMIN.")
     public ResponseEntity<String> criarUsuarioAdministrador(@RequestBody UsuarioDTORecebido usuarioDTO) {
         try{  
             UsuarioDTO usuarioDTOBuilder = UsuarioDTO.builder()
@@ -44,7 +51,9 @@ public class UsuarioController {
         }   
     }
 
-    @PostMapping("/cadastro/user")
+    @PostMapping("/login")
+    @ApiOperation(value = "Login de usuário",
+            notes = "Realiza o login de um usuário, gerando um token de autenticação.")
     public ResponseEntity<String> criarUsuarioComum(@RequestBody UsuarioDTORecebido usuarioDTO) {
         try{  
             UsuarioDTO usuarioDTOBuilder = UsuarioDTO.builder()
@@ -60,7 +69,9 @@ public class UsuarioController {
         }   
     }
 
-     @PostMapping("/login")
+    @PostMapping("/login")
+    @ApiOperation(value = "Login de usuário",
+            notes = "Realiza o login de um usuário, gerando um token de autenticação.")
     public ResponseEntity<?> login(@RequestBody UsuarioDTORecebido usuarioDTO) {
         try {
             String token = usuarioService.login(usuarioDTO.getEmail(), usuarioDTO.getSenha());
