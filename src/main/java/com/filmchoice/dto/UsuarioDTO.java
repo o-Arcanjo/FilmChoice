@@ -6,6 +6,7 @@ public class UsuarioDTO {
     private String senha;
     private String email;
     private Papel papel;
+    private String codigo;
 
     public String getNome() {
         return nome;
@@ -13,6 +14,10 @@ public class UsuarioDTO {
 
     public String getSenha() {
         return senha;
+    }
+
+    public String getCodigo(){
+        return codigo;
     }
 
     public String getEmail() {
@@ -29,6 +34,7 @@ public class UsuarioDTO {
         this.senha = builder.senha;
         this.email = builder.email;
         this.papel = builder.papel;
+        this.codigo = builder.codigo;
     }
 
     public static Builder builder(){
@@ -40,6 +46,7 @@ public class UsuarioDTO {
         private String senha;
         private String email;
         private Papel papel;
+        private String codigo;
 
         public Builder nome(String nome){
             this.nome = nome;
@@ -60,7 +67,10 @@ public class UsuarioDTO {
             this.papel = papel;
             return this;
         }
-
+        public Builder codigo(String codigo){
+            this.codigo = codigo;
+            return this;
+        }
         public UsuarioDTO build(){
             return new UsuarioDTO(this);
         }

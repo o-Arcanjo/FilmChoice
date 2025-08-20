@@ -8,7 +8,7 @@ public final class LoadPropertiesBd{
     public static<T extends LoadProperties> Properties loadProperties(T conexao) throws IOException {
         Properties props = new Properties();
         String path = conexao.getArquivoProperties();
-       try(InputStream input = LoadPropertiesBd.class.getResourceAsStream(path)){
+       try(InputStream input = LoadPropertiesBd.class.getResourceAsStream("/" + path)){
             if(input == null){
                 throw new IOException("Arquivo config.properties não encontrado!");
             }

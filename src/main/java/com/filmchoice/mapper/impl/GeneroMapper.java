@@ -6,11 +6,13 @@ import com.filmchoice.mapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Lazy;
 
 @Component
 public class GeneroMapper implements Converter<GeneroDTO, Genero> {
 
     @Autowired
+    @Lazy
     private FilmeMapper filmeMapper;
 
     @Override

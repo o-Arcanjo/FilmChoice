@@ -2,6 +2,8 @@ package com.filmchoice.mapper.impl;
 import com.filmchoice.dto.AtorDTO;
 import com.filmchoice.entities.Ator;
 import com.filmchoice.mapper.Converter;
+import org.springframework.context.annotation.Lazy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
@@ -10,9 +12,11 @@ import java.util.stream.Collectors;
 public class AtorMapper implements Converter<AtorDTO, Ator> {
 
     @Autowired
+    @Lazy
     private FilmeMapper filmeMapper; 
 
     @Autowired
+    @Lazy
     private PaisMapper paisMapper;
 
     @Override

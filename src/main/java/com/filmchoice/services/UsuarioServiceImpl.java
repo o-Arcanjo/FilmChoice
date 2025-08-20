@@ -7,7 +7,7 @@ import com.filmchoice.dto.UsuarioDTORecebido;
 import com.filmchoice.entities.Usuario;
 import com.filmchoice.enums.ChaveSecreta;
 import com.filmchoice.mapper.impl.UsuarioMapper;
-
+import java.util.List;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -41,7 +41,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void cadastrarUsuario(UsuarioDTORecebido usuarioDTORecebido) throws ServiceException, IOException {
+    public void cadastrarUsuario(UsuarioDTO usuarioDTORecebido) throws ServiceException, IOException {
         if (verificarUsuarioCadastrado(usuarioDTORecebido.getEmail())) {
             throw new ServiceException("Usuário já cadastrado com o e-mail: " + usuarioDTORecebido.getEmail());
         }
@@ -55,6 +55,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 !usuarioDTORecebido.getCodigo().equals(codigoSecreto)) {
             throw new ServiceException("Código de administrador inválido");
         }
+        
 
         String senhaHash = authService.criptografarSenha(usuarioDTORecebido.getSenha());
 
@@ -129,7 +130,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario atualizarUsuario(Long id, UsuarioDTORecebido usuarioDTO) throws ServiceException, IOException {
+    public Usuario atualizarUsuario(Long id, UsuarioDTORecebido usuarioDTO) throws ServiceException {
         try {
             Usuario usuarioExistente = usuarioDAO.getByID(id);
 

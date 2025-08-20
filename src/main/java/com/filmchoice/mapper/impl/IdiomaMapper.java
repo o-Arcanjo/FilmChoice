@@ -2,18 +2,17 @@ package com.filmchoice.mapper.impl;
 
 import com.filmchoice.dto.IdiomaDTO;
 import com.filmchoice.entities.Idioma;
-import com.filmchoice.entities.Filme;
 import com.filmchoice.mapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
+import org.springframework.context.annotation.Lazy;
 import java.util.stream.Collectors;
 
 @Component
 public class IdiomaMapper implements Converter<IdiomaDTO, Idioma> {
 
     @Autowired
+    @Lazy
     private FilmeMapper filmeMapper;
 
     @Override

@@ -2,6 +2,7 @@ package com.filmchoice.mapper.impl;
 import com.filmchoice.dto.FilmeDTO;
 import com.filmchoice.entities.*;
 import com.filmchoice.mapper.Converter;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
@@ -10,15 +11,19 @@ import java.util.stream.Collectors;
 public class FilmeMapper implements Converter<FilmeDTO, Filme> {
 
     @Autowired
+    @Lazy
     private AtorMapper atorMapper;
 
     @Autowired
+    @Lazy
     private DiretorMapper diretorMapper;
 
     @Autowired
+    @Lazy
     private GeneroMapper generoMapper;
 
     @Autowired
+    @Lazy
     private IdiomaMapper idiomaMapper;
 
     @Override

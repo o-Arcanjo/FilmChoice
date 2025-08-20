@@ -2,10 +2,14 @@ package com.filmchoice.controllers;
 
 import java.io.IOException;
 import java.util.List;
+
 import com.filmchoice.entities.Usuario;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.filmchoice.dto.UsuarioDTO;
 import com.filmchoice.dto.UsuarioDTORecebido;
 import com.filmchoice.enums.Papel;
 import com.filmchoice.response.ErrorResponsee;
@@ -27,8 +31,13 @@ public class UsuarioController {
     @PostMapping("/cadastro/admin")
     public ResponseEntity<String> criarUsuarioAdministrador(@RequestBody UsuarioDTORecebido usuarioDTO) {
         try{  
-             usuarioDTO.setPapel(Papel.ADMIN);
-             usuarioService.cadastrarUsuario(usuarioDTO);
+            UsuarioDTO usuarioDTOBuilder = UsuarioDTO.builder()
+            .nome(usuarioDTO.getNome())
+            .email(usuarioDTO.getNome())
+            .senha(usuarioDTO.getSenha())
+            .papel(Papel.ADMIN)
+            .build();
+             usuarioService.cadastrarUsuario(usuarioDTOBuilder);
             return ResponseEntity.status(HttpStatus.CREATED).body("Usuário administrador cadastrado com sucesso!");
         }catch(ServiceException | IOException e){
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -38,8 +47,13 @@ public class UsuarioController {
     @PostMapping("/cadastro/user")
     public ResponseEntity<String> criarUsuarioComum(@RequestBody UsuarioDTORecebido usuarioDTO) {
         try{  
-             usuarioDTO.setPapel(Papel.USER);
-             usuarioService.cadastrarUsuario(usuarioDTO);
+            UsuarioDTO usuarioDTOBuilder = UsuarioDTO.builder()
+                        .nome(usuarioDTO.getNome())
+                        .email(usuarioDTO.getNome())
+                        .senha(usuarioDTO.getSenha())
+                        .papel(Papel.USER)
+                        .build();
+             usuarioService.cadastrarUsuario(usuarioDTOBuilder);
             return ResponseEntity.status(HttpStatus.CREATED).body("Usuário comum cadastrado com sucesso!");
         }catch(ServiceException | IOException e){
             return ResponseEntity.badRequest().body(e.getMessage());

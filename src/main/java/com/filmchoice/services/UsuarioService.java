@@ -2,12 +2,13 @@ package com.filmchoice.services;
 import java.io.IOException;
 import java.util.List;
 
+import com.filmchoice.dto.UsuarioDTO;
 import com.filmchoice.dto.UsuarioDTORecebido;
 import com.filmchoice.entities.Usuario;
 
 
 public interface UsuarioService{
-   void cadastrarUsuario(UsuarioDTORecebido usuarioEntrada) throws ServiceException, IOException;
+   void cadastrarUsuario(UsuarioDTO usuarioEntrada) throws ServiceException, IOException;
    String login(String email, String senha) throws ServiceException;
    boolean verificarUsuarioCadastrado(String email) throws ServiceException;
    //Métodos para CRUD COMPLETO

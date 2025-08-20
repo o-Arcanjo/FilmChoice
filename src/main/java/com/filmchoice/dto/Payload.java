@@ -1,7 +1,6 @@
 package com.filmchoice.dto;
 
 import java.time.LocalDate;
-
 import com.filmchoice.enums.Papel;
 
 public class Payload {

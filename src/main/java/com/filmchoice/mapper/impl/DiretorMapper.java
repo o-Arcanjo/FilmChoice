@@ -5,14 +5,17 @@ import com.filmchoice.mapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Lazy;
 
 @Component
 public class DiretorMapper implements Converter<DiretorDTO, Diretor> {
 
     @Autowired
+    @Lazy
     private PaisMapper paisMapper;
 
     @Autowired
+    @Lazy
     private FilmeMapper filmeMapper;
 
     @Override
