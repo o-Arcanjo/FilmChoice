@@ -140,4 +140,9 @@ public class Filme {
                 "Receita= " + receita +
                 " }"; 
     }
+
+    public Filme orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
 }

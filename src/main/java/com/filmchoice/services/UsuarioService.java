@@ -11,7 +11,6 @@ public interface UsuarioService{
    void cadastrarUsuario(UsuarioDTO usuarioEntrada) throws ServiceException, IOException;
    String login(String email, String senha) throws ServiceException;
    boolean verificarUsuarioCadastrado(String email) throws ServiceException;
-   //Métodos para CRUD COMPLETO
    Usuario buscarUsuarioPorId(Long id) throws ServiceException;
    Usuario buscarUsuarioPorEmail(String email) throws ServiceException;
    List<Usuario> listarTodosUsuarios() throws ServiceException;

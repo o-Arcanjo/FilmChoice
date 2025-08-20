@@ -1,8 +1,8 @@
 package com.filmchoice.services;
 
-import com.filmchoice.entities.Usuario;
+import com.filmchoice.dao.PersistenciaDawException;
+import com.filmchoice.dto.AvaliacaoDTO;
 
-public interface UsuarioComumService extends UsuarioService{
-    public void fazerAvaliacao(Usuario usuario);
-    
+public interface UsuarioComumService{
+    public void fazerAvaliacao(String token, AvaliacaoDTO avaliacao) throws ServiceException,  PersistenciaDawException ;
 }

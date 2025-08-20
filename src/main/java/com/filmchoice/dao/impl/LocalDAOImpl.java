@@ -10,9 +10,9 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Repository
 @Transactional(readOnly = true)
-public class LocalDAO extends AbstractDAOImpl<Local, Long> {
+public class LocalDAOImpl extends AbstractDAOImpl<Local, Long> {
 
-    public LocalDAO(EntityManagerFactory emf) {
+    public LocalDAOImpl(EntityManagerFactory emf) {
         super(Local.class, emf);
     }
 

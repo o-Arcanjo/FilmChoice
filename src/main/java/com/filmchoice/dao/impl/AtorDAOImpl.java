@@ -1,20 +1,18 @@
 package com.filmchoice.dao.impl;
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.filmchoice.dao.PersistenciaDawException;
 import com.filmchoice.entities.Ator;
-
+import com.filmchoice.dao.*;
 import jakarta.persistence.EntityManagerFactory;
 
 
 @Repository
 @Transactional(readOnly = true)
-public class AtorDAO extends AbstractDAOImpl<Ator, Long> {
+public class AtorDAOImpl extends AbstractDAOImpl<Ator, Long> implements AtorDAO{
 
-    public AtorDAO(EntityManagerFactory emf) {
+    public AtorDAOImpl(EntityManagerFactory emf) {
         super(Ator.class, emf);
     }
 

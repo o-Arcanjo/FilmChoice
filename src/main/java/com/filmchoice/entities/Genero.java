@@ -43,6 +43,7 @@ public class Genero {
         return id;
     }
 
+    
     public void setId(Long id) {    // Adicionado setter
         this.id = id;
     }

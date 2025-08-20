@@ -7,15 +7,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.filmchoice.dao.*;
 import jakarta.persistence.EntityManagerFactory;
 
 
 @Repository
 @Transactional(readOnly = true)
-public class IdiomaDAO extends AbstractDAOImpl<Idioma, Long> {
+public class IdiomaDAOImpl extends AbstractDAOImpl<Idioma, Long> implements IdiomaDAO{
 
-    public IdiomaDAO(EntityManagerFactory emf) {
+    public IdiomaDAOImpl(EntityManagerFactory emf) {
         super(Idioma.class, emf);
     }
 

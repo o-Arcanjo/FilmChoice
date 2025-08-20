@@ -1,4 +1,5 @@
 package com.filmchoice.entities;
+
 import java.util.Objects;
 
 import jakarta.persistence.*;
@@ -32,26 +33,42 @@ public class Avaliacao {
         this.comentario = comentario;
     }
 
+    // Getters e Setters
     public Long getId(){
         return id;
     }
 
-    public int getNota(){
+    public Integer getNota(){
         return nota;
+    }
+
+    public void setNota(Integer nota){
+        this.nota = nota;
     }
 
     public String getComentario(){
         return comentario;
     }
 
-    public void setNota(int nota){
-        this.nota = nota;
-    }
-
     public void setComentario(String comentario){
         this.comentario = comentario;
     }
 
+    public Filme getFilme() {
+        return filme;
+    }
+
+    public void setFilme(Filme filme) {
+        this.filme = filme;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     @Override
     public boolean equals(Object o){
@@ -70,8 +87,8 @@ public class Avaliacao {
     public String toString(){
         return "Avaliacao{ " +
                 "id= " + id + 
-                "Nota= " + nota +
-                "Comentario= " + comentario +
+                ", Nota= " + nota +
+                ", Comentario= " + comentario +
                 " }"; 
     }
 }

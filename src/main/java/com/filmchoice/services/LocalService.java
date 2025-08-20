@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.base.Supplier;
 import com.filmchoice.dao.PersistenciaDawException;
-import com.filmchoice.dao.impl.LocalDAO;
+import com.filmchoice.dao.impl.LocalDAOImpl;
 import com.filmchoice.entities.Local;
 import com.filmchoice.model.LocalInterface;
 import com.filmchoice.model.LocalModel;
@@ -16,9 +16,9 @@ import com.filmchoice.model.LocalProxy;
 
 @Service
 public class LocalService {
-    private final LocalDAO localDAO;
+    private final LocalDAOImpl localDAO;
 
-    public LocalService(LocalDAO localDAO){
+    public LocalService(LocalDAOImpl localDAO){
         this.localDAO = localDAO;
     }   
 

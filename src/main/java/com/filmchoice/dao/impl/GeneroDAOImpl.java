@@ -7,14 +7,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.filmchoice.dao.*;
 import jakarta.persistence.EntityManagerFactory;
 
 @Repository
 @Transactional(readOnly = true)
-public class GeneroDAO extends AbstractDAOImpl<Genero, Long> {
+public class GeneroDAOImpl extends AbstractDAOImpl<Genero, Long> implements GeneroDAO{
 
-    public GeneroDAO(EntityManagerFactory emf) {
+    public GeneroDAOImpl(EntityManagerFactory emf) {
         super(Genero.class, emf);
     }
 

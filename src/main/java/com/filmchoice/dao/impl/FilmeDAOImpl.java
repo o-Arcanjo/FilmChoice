@@ -7,14 +7,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.filmchoice.dao.*;
 import jakarta.persistence.EntityManagerFactory;
 
 @Repository
 @Transactional(readOnly = true)
-public class FilmeDAO extends AbstractDAOImpl<Filme, Long> {
+public class FilmeDAOImpl extends AbstractDAOImpl<Filme, Long> implements FilmeDAO{
 
-    public FilmeDAO(EntityManagerFactory emf) {
+    public FilmeDAOImpl(EntityManagerFactory emf) {
         super(Filme.class, emf);
     }
 

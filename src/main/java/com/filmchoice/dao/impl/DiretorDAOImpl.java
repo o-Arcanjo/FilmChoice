@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManagerFactory;
-
+import com.filmchoice.dao.*;
 @Repository
 @Transactional(readOnly = true)
-public class DiretorDAO extends AbstractDAOImpl<Diretor, Long> {
+public class DiretorDAOImpl extends AbstractDAOImpl<Diretor, Long> implements DiretorDAO{
 
-    public DiretorDAO(EntityManagerFactory emf) {
+    public DiretorDAOImpl(EntityManagerFactory emf) {
         super(Diretor.class, emf);
     }
 

@@ -2,6 +2,8 @@ package com.filmchoice.services.proxies;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.filmchoice.dao.PersistenciaDawException;
 import com.filmchoice.dao.UsuarioDAO;
 import com.filmchoice.dto.*;
@@ -13,6 +15,8 @@ import com.filmchoice.services.ServiceException;
 import com.filmchoice.services.TokenService;
 import com.filmchoice.services.UsuarioAdminService;
 
+
+@Component
 public class UsuarioAdminProxy implements UsuarioAdminService {
 
     private final TokenService tokenService;

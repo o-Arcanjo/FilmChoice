@@ -1,11 +1,9 @@
-/*package com.filmchoice.services;
+package com.filmchoice.services;
 
 import com.filmchoice.dao.*;
 import com.filmchoice.dto.*;
-import com.filmchoice.exceptions.PersistenciaDawException;
-import com.filmchoice.exceptions.ServiceException;
-import com.filmchoice.mapper.*;
-import com.filmchoice.security.JwtTokenProvider;
+import com.filmchoice.entities.*;
+import com.filmchoice.mapper.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,15 +14,13 @@ import java.util.stream.Collectors;
 @Service
 public class UsuarioAdminServiceImpl implements UsuarioAdminService {
 
-    // Repositories
-    private final FilmeRepository filmeRepository;
-    private final AtorRepository atorRepository;
-    private final DiretorRepository diretorRepository;
-    private final GeneroRepository generoRepository;
-    private final IdiomaRepository idiomaRepository;
-    private final PaisRepository paisRepository;
+    private final FilmeDAO filmeDAO;
+    private final AtorDAO atorDAO;
+    private final DiretorDAO diretorDAO;
+    private final GeneroDAO generoDAO;
+    private final IdiomaDAO idiomaDAO;
+    private final PaisDAO paisDAO;
 
-    // Mappers
     private final FilmeMapper filmeMapper;
     private final AtorMapper atorMapper;
     private final DiretorMapper diretorMapper;
@@ -32,30 +28,26 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     private final IdiomaMapper idiomaMapper;
     private final PaisMapper paisMapper;
 
-    private final JwtTokenProvider tokenProvider;
-
     @Autowired
     public UsuarioAdminServiceImpl(
-            FilmeRepository filmeRepository,
-            AtorRepository atorRepository,
-            DiretorRepository diretorRepository,
-            GeneroRepository generoRepository,
-            IdiomaRepository idiomaRepository,
-            PaisRepository paisRepository,
-            JwtTokenProvider tokenProvider,
+            FilmeDAO filmeDAO,
+            AtorDAO atorDAO,
+            DiretorDAO diretorDAO,
+            GeneroDAO generoDAO,
+            IdiomaDAO idiomaDAO,
+            PaisDAO paisDAO,
             FilmeMapper filmeMapper,
             AtorMapper atorMapper,
             DiretorMapper diretorMapper,
             GeneroMapper generoMapper,
             IdiomaMapper idiomaMapper,
             PaisMapper paisMapper) {
-        this.filmeRepository = filmeRepository;
-        this.atorRepository = atorRepository;
-        this.diretorRepository = diretorRepository;
-        this.generoRepository = generoRepository;
-        this.idiomaRepository = idiomaRepository;
-        this.paisRepository = paisRepository;
-        this.tokenProvider = tokenProvider;
+        this.filmeDAO = filmeDAO;
+        this.atorDAO = atorDAO;
+        this.diretorDAO = diretorDAO;
+        this.generoDAO = generoDAO;
+        this.idiomaDAO = idiomaDAO;
+        this.paisDAO = paisDAO;
         this.filmeMapper = filmeMapper;
         this.atorMapper = atorMapper;
         this.diretorMapper = diretorMapper;
@@ -64,25 +56,17 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
         this.paisMapper = paisMapper;
     }
 
-    private void validarTokenAdmin(String token) throws ServiceException {
-        if (!tokenProvider.validateToken(token) || !tokenProvider.isAdmin(token)) {
-            throw new ServiceException("Acesso não autorizado: requer privilégios de administrador");
-        }
-    }
-
-    // ========== FILME ==========
+    // ================== FILME ==================
     @Override
     @Transactional
     public void cadastrarFilme(FilmeDTO filmeDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
         Filme filme = filmeMapper.converterElementoEntidade(filmeDTO);
-        filmeRepository.salvar(filme);
+        filmeDAO.save(filme);
     }
 
     @Override
     public List<FilmeDTO> listarFilmesCadastrados(String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        return filmeRepository.listarTodos().stream()
+        return filmeDAO.getAll().stream()
                 .map(filmeMapper::converterElementoDTO)
                 .collect(Collectors.toList());
     }
@@ -90,43 +74,39 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Override
     @Transactional
     public void atualizarFilme(FilmeDTO filmeDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        Filme filmeExistente = filmeRepository.buscarPorId(filmeDTO.getId())
-                .orElseThrow(() -> new ServiceException("Filme não encontrado"));
-
-        // Atualiza apenas os campos permitidos
+        Filme filmeExistente = filmeDAO.getByID(filmeDTO.getId());
+        if (filmeExistente == null) {
+            throw new ServiceException("Filme não encontrado");
+        }
+    
         Filme filmeAtualizado = filmeMapper.converterElementoEntidade(filmeDTO);
         filmeExistente.setTitulo(filmeAtualizado.getTitulo());
-        filmeExistente.setAnoLancamento(filmeAtualizado.getAnoLancamento());
-        filmeExistente.setDuracao(filmeAtualizado.getDuracao());
-        filmeExistente.setSinopse(filmeAtualizado.getSinopse());
-
-        filmeRepository.atualizar(filmeExistente);
+        filmeExistente.setLancamento(filmeAtualizado.getLancamento());
+        filmeExistente.setDuracaoMinutos(filmeAtualizado.getDuracaoMinutos());
+        filmeExistente.setReceita(filmeAtualizado.getReceita());
+    
+        filmeDAO.update(filmeExistente);
     }
-
+    
     @Override
     @Transactional
     public void deletarFilme(Long id, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        if (!filmeRepository.existe(id)) {
+        if (filmeDAO.getByID(id) == null) {
             throw new ServiceException("Filme não encontrado");
         }
-        filmeRepository.deletar(id);
+        filmeDAO.delete(id);
     }
 
-    // ========== ATOR ==========
     @Override
     @Transactional
     public void cadastrarAtor(AtorDTO atorDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
         Ator ator = atorMapper.converterElementoEntidade(atorDTO);
-        atorRepository.salvar(ator);
+        atorDAO.save(ator);
     }
 
     @Override
     public List<AtorDTO> listarAtoresCadastrados(String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        return atorRepository.listarTodos().stream()
+        return atorDAO.getAll().stream()
                 .map(atorMapper::converterElementoDTO)
                 .collect(Collectors.toList());
     }
@@ -134,40 +114,37 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Override
     @Transactional
     public void atualizarAtor(AtorDTO atorDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        Ator atorExistente = atorRepository.buscarPorId(atorDTO.getId())
-                .orElseThrow(() -> new ServiceException("Ator não encontrado"));
+        Ator atorExistente = atorDAO.getByID(atorDTO.getId());
+        if (atorExistente == null) {
+            throw new ServiceException("Ator não encontrado");
+        }
 
         Ator atorAtualizado = atorMapper.converterElementoEntidade(atorDTO);
         atorExistente.setNome(atorAtualizado.getNome());
         atorExistente.setDataNascimento(atorAtualizado.getDataNascimento());
 
-        atorRepository.atualizar(atorExistente);
+        atorDAO.update(atorExistente);
     }
 
     @Override
     @Transactional
     public void deletarAtor(Long id, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        if (!atorRepository.existe(id)) {
+        if (atorDAO.getByID(id) == null) {
             throw new ServiceException("Ator não encontrado");
         }
-        atorRepository.deletar(id);
+        atorDAO.delete(id);
     }
 
-    // ========== DIRETOR ==========
     @Override
     @Transactional
     public void cadastrarDiretor(DiretorDTO diretorDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
         Diretor diretor = diretorMapper.converterElementoEntidade(diretorDTO);
-        diretorRepository.salvar(diretor);
+        diretorDAO.save(diretor);
     }
 
     @Override
     public List<DiretorDTO> listarDiretoresCadastrados(String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        return diretorRepository.listarTodos().stream()
+        return diretorDAO.getAll().stream()
                 .map(diretorMapper::converterElementoDTO)
                 .collect(Collectors.toList());
     }
@@ -175,40 +152,37 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Override
     @Transactional
     public void atualizarDiretor(DiretorDTO diretorDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        Diretor diretorExistente = diretorRepository.buscarPorId(diretorDTO.getId())
-                .orElseThrow(() -> new ServiceException("Diretor não encontrado"));
+        Diretor diretorExistente = diretorDAO.getByID(diretorDTO.getId());
+        if (diretorExistente == null) {
+            throw new ServiceException("Diretor não encontrado");
+        }
 
         Diretor diretorAtualizado = diretorMapper.converterElementoEntidade(diretorDTO);
         diretorExistente.setNome(diretorAtualizado.getNome());
         diretorExistente.setDataNascimento(diretorAtualizado.getDataNascimento());
 
-        diretorRepository.atualizar(diretorExistente);
+        diretorDAO.update(diretorExistente);
     }
 
     @Override
     @Transactional
     public void deletarDiretor(Long id, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        if (!diretorRepository.existe(id)) {
+        if (diretorDAO.getByID(id) == null) {
             throw new ServiceException("Diretor não encontrado");
         }
-        diretorRepository.deletar(id);
+        diretorDAO.delete(id);
     }
 
-    // ========== GÊNERO ==========
     @Override
     @Transactional
     public void cadastrarGenero(GeneroDTO generoDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
         Genero genero = generoMapper.converterElementoEntidade(generoDTO);
-        generoRepository.salvar(genero);
+        generoDAO.save(genero);
     }
 
     @Override
     public List<GeneroDTO> listarGenerosCadastrados(String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        return generoRepository.listarTodos().stream()
+        return generoDAO.getAll().stream()
                 .map(generoMapper::converterElementoDTO)
                 .collect(Collectors.toList());
     }
@@ -216,39 +190,34 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Override
     @Transactional
     public void atualizarGenero(GeneroDTO generoDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        Genero generoExistente = generoRepository.buscarPorId(generoDTO.getId())
-                .orElseThrow(() -> new ServiceException("Gênero não encontrado"));
-
+        Genero generoExistente = generoDAO.getByID(generoDTO.getId());
+        if (generoExistente == null) {
+            throw new ServiceException("Gênero não encontrado");
+        }
         Genero generoAtualizado = generoMapper.converterElementoEntidade(generoDTO);
-        generoExistente.setNome(generoAtualizado.getNome());
-
-        generoRepository.atualizar(generoExistente);
+        generoExistente.setTipo(generoAtualizado.getTipo());
+        generoDAO.update(generoExistente);
     }
 
     @Override
     @Transactional
     public void deletarGenero(Long id, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        if (!generoRepository.existe(id)) {
+        if (generoDAO.getByID(id) == null) {
             throw new ServiceException("Gênero não encontrado");
         }
-        generoRepository.deletar(id);
+        generoDAO.delete(id);
     }
 
-    // ========== IDIOMA ==========
     @Override
     @Transactional
     public void cadastrarIdioma(IdiomaDTO idiomaDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
         Idioma idioma = idiomaMapper.converterElementoEntidade(idiomaDTO);
-        idiomaRepository.salvar(idioma);
+        idiomaDAO.save(idioma);
     }
 
     @Override
     public List<IdiomaDTO> listarIdiomasCadastrados(String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        return idiomaRepository.listarTodos().stream()
+        return idiomaDAO.getAll().stream()
                 .map(idiomaMapper::converterElementoDTO)
                 .collect(Collectors.toList());
     }
@@ -256,39 +225,35 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Override
     @Transactional
     public void atualizarIdioma(IdiomaDTO idiomaDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        Idioma idiomaExistente = idiomaRepository.buscarPorId(idiomaDTO.getId())
-                .orElseThrow(() -> new ServiceException("Idioma não encontrado"));
-
+        Idioma idiomaExistente = idiomaDAO.getByID(idiomaDTO.getId());
+        if (idiomaExistente == null) {
+            throw new ServiceException("Idioma não encontrado");
+        }
         Idioma idiomaAtualizado = idiomaMapper.converterElementoEntidade(idiomaDTO);
-        idiomaExistente.setNome(idiomaAtualizado.getNome());
-
-        idiomaRepository.atualizar(idiomaExistente);
+        idiomaExistente.setTipo(idiomaAtualizado.getTipo());
+        idiomaDAO.update(idiomaExistente);
     }
 
     @Override
     @Transactional
     public void deletarIdioma(Long id, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        if (!idiomaRepository.existe(id)) {
+        if (idiomaDAO.getByID(id) == null) {
             throw new ServiceException("Idioma não encontrado");
         }
-        idiomaRepository.deletar(id);
+        idiomaDAO.delete(id);
     }
 
-    // ========== PAÍS ==========
+    // ================== PAÍS ==================
     @Override
     @Transactional
     public void cadastrarPais(PaisDTO paisDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
         Pais pais = paisMapper.converterElementoEntidade(paisDTO);
-        paisRepository.salvar(pais);
+        paisDAO.save(pais);
     }
 
     @Override
     public List<PaisDTO> listarPaisesCadastrados(String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        return paisRepository.listarTodos().stream()
+        return paisDAO.getAll().stream()
                 .map(paisMapper::converterElementoDTO)
                 .collect(Collectors.toList());
     }
@@ -296,26 +261,21 @@ public class UsuarioAdminServiceImpl implements UsuarioAdminService {
     @Override
     @Transactional
     public void atualizarPais(PaisDTO paisDTO, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        Pais paisExistente = paisRepository.buscarPorId(paisDTO.getId())
-                .orElseThrow(() -> new ServiceException("País não encontrado"));
-
+        Pais paisExistente = paisDAO.getByID(paisDTO.getId());
+        if (paisExistente == null) {
+            throw new ServiceException("País não encontrado");
+        }
         Pais paisAtualizado = paisMapper.converterElementoEntidade(paisDTO);
         paisExistente.setNome(paisAtualizado.getNome());
-        paisExistente.setSigla(paisAtualizado.getSigla());
-
-        paisRepository.atualizar(paisExistente);
+        paisDAO.update(paisExistente);
     }
 
     @Override
     @Transactional
     public void deletarPais(Long id, String token) throws ServiceException, PersistenciaDawException {
-        validarTokenAdmin(token);
-        if (!paisRepository.existe(id)) {
+        if (paisDAO.getByID(id) == null) {
             throw new ServiceException("País não encontrado");
         }
-        paisRepository.deletar(id);
+        paisDAO.delete(id);
     }
 }
-
-*/

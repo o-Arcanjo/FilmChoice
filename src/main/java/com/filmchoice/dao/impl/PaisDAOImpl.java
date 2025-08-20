@@ -6,16 +6,20 @@ import com.filmchoice.entities.Pais;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+
 import jakarta.persistence.EntityManagerFactory;
+
 import org.springframework.transaction.annotation.Transactional;
+
+import com.filmchoice.dao.PaisDAO;
 
 
 
 @Repository
 @Transactional(readOnly = true)
-public class PaisDAO extends AbstractDAOImpl<Pais, Long> {
+public class PaisDAOImpl extends AbstractDAOImpl<Pais, Long> implements PaisDAO{
 
-    public PaisDAO( EntityManagerFactory emf) {
+    public PaisDAOImpl( EntityManagerFactory emf) {
         super(Pais.class, emf);
     }
 
