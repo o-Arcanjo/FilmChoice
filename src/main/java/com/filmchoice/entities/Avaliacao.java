@@ -1,5 +1,6 @@
 package com.filmchoice.entities;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import jakarta.persistence.*;
@@ -14,6 +15,8 @@ public class Avaliacao {
 
     @Column(name="nota", nullable=false)
     private Integer nota;
+
+    private Float mediaConfiavel;
 
     @Lob
     @Column(name="comentario", nullable=false)
@@ -38,12 +41,21 @@ public class Avaliacao {
         return id;
     }
 
+
     public Integer getNota(){
         return nota;
     }
 
+    public void setId(Long id){
+        this.id = id;
+    }
+
     public void setNota(Integer nota){
         this.nota = nota;
+    }
+
+    public void setMediaConfiavel(Float mediaConfiavel){
+        this.mediaConfiavel = mediaConfiavel;
     }
 
     public String getComentario(){
