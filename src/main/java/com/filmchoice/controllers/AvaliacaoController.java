@@ -33,10 +33,10 @@ public ResponseEntity<?> fazerAvaliacao(
     String authHeader = request.getHeader("Authorization");
     if (authHeader == null || !authHeader.startsWith("Bearer ")) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token ausente ou inválido");
-    }
+    }                                                                                                           
 
     String token = authHeader.substring(7);
-
+                                                                                                      
     AvaliacaoDTO avaliacao = AvaliacaoDTO.builder()
             .filme(FilmeDTO.builder().id(filmeId).build()) 
             .comentario(avaliacaoDTORecebido.getComentario())

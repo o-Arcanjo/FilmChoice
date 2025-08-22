@@ -49,13 +49,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         Properties props = LoadPropertiesBd.loadProperties(CodigoAdmin.Codigo);
         String codigoSecreto = props.getProperty("CODIGO_ADMIN");
 
-        // Validação do código admin se for papel ADMIN
-        if (usuarioDTORecebido.getPapel() != null &&
-                usuarioDTORecebido.getPapel().name().equals("ADMIN") &&
-                !usuarioDTORecebido.getCodigo().equals(codigoSecreto)) {
-            throw new ServiceException("Código de administrador inválido");
-        }
-        
+
+                        if (usuarioDTORecebido.getPapel() != null &&
+                                usuarioDTORecebido.getPapel().name().equals("ADMIN") &&
+                                !usuarioDTORecebido.getCodigo().equals(codigoSecreto)) {
+                                    System.out.println(codigoSecreto);
+                                    System.out.println(usuarioDTORecebido.getPapel().name());
+                                    System.out.println(usuarioDTORecebido.getCodigo());
+                            throw new ServiceException("Código de administrador inválido");
+                        }
+                        
 
         String senhaHash = authService.criptografarSenha(usuarioDTORecebido.getSenha());
 
