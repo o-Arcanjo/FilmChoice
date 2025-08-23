@@ -29,6 +29,67 @@ public class AvaliacaoJDBCDAOImpl extends AbstractDAOJDBCImpl<Avaliacao, Long> i
         super();
     }
 
+    public List<Avaliacao> obterPrimeirosCincoRankingGlobal() throws PersistenciaDawException{
+        String sql = """
+            WITH tabela_ranking AS (
+                SELECT * FROM obter_avaliacoes_filmes()
+            )
+            SELECT 
+                ranking.filme_id, 
+                ranking.filme_titulo, 
+                ranking.atores,
+                ranking.diretores,
+                ranking.generos,
+                ranking.idiomas,
+                calcular_ic_inferior(ranking.avaliacoes) AS media_real
+            FROM tabela_ranking ranking
+            ORDER BY media_real DESC
+            LIMIT 5;
+        """;
+
+        try (PreparedStatement ps = this.connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery()) {
+
+       List<Avaliacao> ranking = new ArrayList<>();
+       ObjectMapper mapper = new ObjectMapper();
+
+       while (rs.next()) {
+           Filme filme = new Filme();
+           try {
+               String atoresJson = rs.getString("atores");
+               String diretoresJson = rs.getString("diretores");
+               String generosJson = rs.getString("generos");
+               String idiomasJson = rs.getString("idiomas");
+
+           
+               List<Ator> atores = mapper.readValue(atoresJson, new TypeReference<List<Ator>>() {});
+               List<Diretor> diretores = mapper.readValue(diretoresJson, new TypeReference<List<Diretor>>() {});
+               List<Genero> generos = mapper.readValue(generosJson, new TypeReference<List<Genero>>() {});
+               List<Idioma> idiomas = mapper.readValue(idiomasJson, new TypeReference<List<Idioma>>() {});
+
+             
+               filme.setAtores(atores);
+               filme.setDiretores(diretores);
+               filme.setGeneros(generos);
+               filme.setIdiomas(idiomas);
+               filme.setId(rs.getLong("filme_id"));
+               filme.setTitulo(rs.getString("filme_titulo"));
+
+              
+               Avaliacao a = new Avaliacao();
+               a.setFilme(filme);
+               a.setMediaConfiavel(rs.getFloat("media_real"));
+               ranking.add(a);
+           } catch (IOException e) {
+               throw new PersistenciaDawException("Erro ao desserializar JSON", e);
+           }
+       }
+       return ranking;
+   } catch (SQLException e) {
+       throw new PersistenciaDawException("Erro ao obter ranking global", e);
+   }
+    }
+
    
     public List<Avaliacao> obterRankingGlobal() throws PersistenciaDawException {
         String sql = """
