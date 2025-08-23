@@ -76,6 +76,11 @@ A proposta inclui futuras integrações com outros fatores que influenciam a ava
 
 ---
 
+## Como Iniciar o Código?
+
+- Executar os comando presentes no arquivo bash raiz, execute.sh
+- Acessar a rota localhost:8080/swagger-ui/index.html
+
 ## 🏗 Modelo Conceitual
 
 
@@ -146,4 +151,5 @@ Segue abaixo o modelo lógico do projeto, representado por um diagrama de entida
 ## 🏗 Diagrama de estados
 
 ![](https://github.com/o-Arcanjo/FilmChoice/blob/main/imagens/DiagramadeEstados.jpeg)
+
 
