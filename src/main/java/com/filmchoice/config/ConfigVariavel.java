@@ -40,7 +40,7 @@ public class ConfigVariavel {
     }
 
     public String getSenha (){
-        return dbUrl;
+        return dbSenha;
     }
 
     public String getPorta(){
@@ -52,7 +52,7 @@ public class ConfigVariavel {
     }
 
     public String getUser (){
-        return dbUrl;
+        return dbUser;
     }
 
     public String getDatabase(){

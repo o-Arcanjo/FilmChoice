@@ -39,9 +39,16 @@ public class UsuarioAdminProxy implements UsuarioAdminService {
      */
     private void autenticarEAutorizar(String token) throws ServiceException, PersistenciaDawException {
         try {
+            boolean autenticado = this.authService.autenticar(token);
+            
+            if (!autenticado) {
+                throw new ServiceException("Erro na autenticação");
+            }
+
             Payload payload = tokenService.validarToken(token, ChaveSecreta.TOKEN_JWT);
-            if (payload == null) {
-                throw new ServiceException("Token inválido ou payload não pôde ser extraído.");
+
+            if(payload == null){
+                throw new ServiceException("Erro na autenticação");
             }
 
             Usuario usuario = usuarioDAO.getByID(payload.getUserId());

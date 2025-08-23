@@ -12,7 +12,7 @@ public abstract class AbstractDAOJDBCImpl<E,T> implements DAO<E, T>{
     private final JDBCConnection instanceJDBC;
     protected final Connection connection;
 
-    public AbstractDAOJDBCImpl() throws SQLException, InvalidKeyException, IOException{
+    public AbstractDAOJDBCImpl() throws SQLException, InvalidKeyException, IOException, ClassNotFoundException{
         this.instanceJDBC = ManagerFactory.get(JDBCConnection.class);
         this.connection = instanceJDBC.getConexao();
     }

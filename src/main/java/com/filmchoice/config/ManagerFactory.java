@@ -17,7 +17,7 @@ public class ManagerFactory {
     }
         
     public static <T extends IManagerConnection<?>> T get(Class<T> clazz) 
-    throws SQLException, IOException, InvalidKeyException{
+    throws SQLException, IOException, InvalidKeyException, ClassNotFoundException{
        Optional<IManagerInstance<?>> factory = Optional.ofNullable(factories.get(clazz));
        return (T) factory
                   .orElseThrow(() -> new IllegalArgumentException("Classe Não Registrada na Factory" + clazz.getName()))

@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 @FunctionalInterface
 public interface IManagerInstance<Instance extends IManagerConnection<?>> {
-    Instance getInstance() throws SQLException, IOException, InvalidKeyException;
+    Instance getInstance() throws SQLException, IOException, InvalidKeyException, ClassNotFoundException;
 }
