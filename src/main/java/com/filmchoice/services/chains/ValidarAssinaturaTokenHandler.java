@@ -25,6 +25,8 @@ public class ValidarAssinaturaTokenHandler extends HandlerAbstract<ValidarEstrut
 
     @Override
     public boolean verificarResponsabilidade(String token) {
+        System.out.println("validando dados 3");
+        System.out.println(obterPayload(token));
         return obterPayload(token) != null;
     }
 
