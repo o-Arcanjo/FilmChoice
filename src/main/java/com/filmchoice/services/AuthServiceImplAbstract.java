@@ -4,10 +4,10 @@ import com.filmchoice.services.chains.Handler;
 import com.filmchoice.services.chains.ValidarAssinaturaTokenHandler;
 
 
-public abstract class AuthServiceImplAbstract<T extends TokenService> implements AuthService {
-    private final T serviceAuth;
+public abstract class AuthServiceImplAbstract implements AuthService {
+    private final TokenService serviceAuth;
 
-    public AuthServiceImplAbstract(T serviceAuth) {
+    public AuthServiceImplAbstract(TokenService serviceAuth) {
         this.serviceAuth = serviceAuth;
 
     }

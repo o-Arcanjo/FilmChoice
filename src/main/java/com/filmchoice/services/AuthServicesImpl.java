@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class AuthServicesImpl extends AuthServiceImplAbstract<TokenService> {
+public class AuthServicesImpl extends AuthServiceImplAbstract implements AuthService{
     private final BCryptPasswordEncoder encoder;
 
      public AuthServicesImpl(TokenService tokenService) {

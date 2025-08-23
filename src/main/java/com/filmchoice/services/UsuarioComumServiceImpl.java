@@ -1,5 +1,6 @@
 package com.filmchoice.services;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.filmchoice.dao.PersistenciaDawException;
@@ -16,7 +17,8 @@ public class UsuarioComumServiceImpl implements UsuarioComumService {
     private final TokenService tokenService;
     private final AvaliacaoService avaliacaoService;
 
-    public UsuarioComumServiceImpl(TokenService tokenService, AvaliacaoService avaliacaoService){
+    public UsuarioComumServiceImpl(TokenService tokenService,
+     @Qualifier("avaliacaoServiceImpl") AvaliacaoService avaliacaoService){
         this.tokenService = tokenService;
         this.avaliacaoService = avaliacaoService;
     }

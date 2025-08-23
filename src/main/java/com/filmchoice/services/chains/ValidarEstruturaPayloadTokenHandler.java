@@ -18,6 +18,8 @@ extends HandlerAbstract<ValidarEstruturaPayloadTokenHandler, Payload>{
 
     @Override
     public boolean verificarResponsabilidade(Payload payload) {
+        System.out.println("validando dados 2");
+        System.out.println(tokenService.verificarPayload(payload));
         return tokenService.verificarPayload(payload);
     }
 

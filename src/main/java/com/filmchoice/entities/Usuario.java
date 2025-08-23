@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.filmchoice.enums.Papel;
 
 import jakarta.persistence.Column;
@@ -30,6 +31,7 @@ public class Usuario {
     private Long id;
 
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<Avaliacao> avaliacoes;
 
     @Column(name = "nome", nullable = false)

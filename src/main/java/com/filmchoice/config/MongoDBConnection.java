@@ -86,7 +86,7 @@ public class MongoDBConnection implements IManagerConnection<MongoClient>, IConn
         return connection;
     };
 
-    private MongoDatabase getDatabase(){
+    public MongoDatabase getDatabase(){
       return database;
     };
 

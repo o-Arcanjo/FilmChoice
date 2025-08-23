@@ -1,29 +1,31 @@
 package com.filmchoice.entities;
 
 import java.util.Objects;
-
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="Avaliacao")
 public class Avaliacao {
     @Id
-    @GeneratedValue(generator = "jpa_avaliacao_seq")
-    @SequenceGenerator(name = "jpa_avaliacao_seq", sequenceName = "avaliacao_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpa_avaliacao_seq")
+    @SequenceGenerator(name = "jpa_avaliacao_seq", sequenceName = "avaliacao_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name="nota", nullable=false)
     private Integer nota;
 
+    @Transient // INFORMA AO JPA PARA IGNORAR ESTE CAMPO NO BANCO DE DADOS
+    private Float mediaConfiavel;
+
     @Lob
     @Column(name="comentario", nullable=false)
     private String comentario;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // fetch = FetchType.LAZY é uma boa prática para performance
     @JoinColumn(name="filme_id")
     private Filme filme;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="usuario_id")
     private Usuario usuario;
 
@@ -33,9 +35,13 @@ public class Avaliacao {
         this.comentario = comentario;
     }
 
-    // Getters e Setters
+    // Getters e Setters ...
     public Long getId(){
         return id;
+    }
+
+    public void setId(Long id){
+        this.id = id;
     }
 
     public Integer getNota(){
@@ -44,6 +50,14 @@ public class Avaliacao {
 
     public void setNota(Integer nota){
         this.nota = nota;
+    }
+
+    public Float getMediaConfiavel() {
+        return mediaConfiavel;
+    }
+
+    public void setMediaConfiavel(Float mediaConfiavel){
+        this.mediaConfiavel = mediaConfiavel;
     }
 
     public String getComentario(){
@@ -80,15 +94,16 @@ public class Avaliacao {
 
     @Override
     public int hashCode(){
-        return Objects.hash(id);
+        // Usar a classe como fallback se o id for nulo
+        return getClass().hashCode();
     }
 
     @Override
     public String toString(){
         return "Avaliacao{ " +
-                "id= " + id + 
+                "id= " + id +
                 ", Nota= " + nota +
-                ", Comentario= " + comentario +
-                " }"; 
+                ", Comentario= '" + comentario + '\'' +
+                " }";
     }
 }

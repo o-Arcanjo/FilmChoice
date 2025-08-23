@@ -47,6 +47,8 @@
             </goals>
             <configuration>
               <enableLazyInitialization>true</enableLazyInitialization>
+              <enableDirtyTracking>true</enableDirtyTracking>
+              <enableAssociationManagement>true</enableAssociationManagement>
             </configuration>
           </execution>
         </executions>
@@ -67,15 +69,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>mongodb-driver-reactivestreams</artifactId>
-      <version>4.11.2</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.hibernate.orm</groupId>
       <artifactId>hibernate-spatial</artifactId>
-      <version>6.6.11.Final</version>
+      <version>6.4.4.Final</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -87,7 +83,7 @@
     <dependency>
       <groupId>io.minio</groupId>
       <artifactId>minio</artifactId>
-      <version>8.4.3</version>
+      <version>8.5.7</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -103,15 +99,21 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
       <version>8.0.33</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>protobuf-java</artifactId>
+          <groupId>com.google.protobuf</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-core</artifactId>
-      <version>3.6.0</version>
+      <version>3.6.5</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -129,13 +131,13 @@
     <dependency>
       <groupId>org.hibernate.orm</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>6.6.11.Final</version>
+      <version>6.4.4.Final</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.hibernate.orm</groupId>
       <artifactId>hibernate-c3p0</artifactId>
-      <version>6.6.11.Final</version>
+      <version>6.4.4.Final</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -144,13 +146,20 @@
       <version>10.0.0</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.3.0</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <properties>
-    <hibernate.version>6.6.11.Final</hibernate.version>
+    <hibernate.version>6.4.4.Final</hibernate.version>
     <java.version>17</java.version>
     <maven.shade.plugin.version>3.6.0</maven.shade.plugin.version>
     <postgresql.driver.version>42.7.5</postgresql.driver.version>
     <mysql.driver.version>8.0.33</mysql.driver.version>
+    <springdoc.version>2.3.0</springdoc.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>

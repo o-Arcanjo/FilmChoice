@@ -24,12 +24,16 @@ public class ValidarEstruturaTokenHandler
 
     @Override
     public boolean verificarResponsabilidade(String token) {
+        System.out.println("validando dados");
         this.validarDados = new ValidarDados(TokenEsperado.TOKEN.getRegex(), converterEmDTO(token));
+        System.out.println(this.validarDados + " validados dados");
+        System.out.println(this.validarDados.validarCampos());
         return this.validarDados.validarCampos();
     }
 
     @Override
     public boolean verificarProximo(String token) {
+        System.out.println("Verificar estrutura do token");
         if (!this.verificarResponsabilidade(token)) {
             return false;
         }

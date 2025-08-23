@@ -7,12 +7,17 @@ import java.sql.SQLException;
 import java.util.Properties;
 import com.filmchoice.enums.TipoConexao;
 
+
+
+
+
 public final class JDBCConnection implements IManagerConnection<Connection>, IConnection {
     private static volatile JDBCConnection instance;
     private Connection connection;
 
-    private JDBCConnection(ConfigVariavel config) throws SQLException {
+    private JDBCConnection(ConfigVariavel config) throws SQLException, ClassNotFoundException {
         try {
+            Class.forName(config.getDrive());
             this.connection = DriverManager.getConnection(
                 config.getUrl(),
                 config.getUser(),
@@ -23,7 +28,7 @@ public final class JDBCConnection implements IManagerConnection<Connection>, ICo
         }
     }
 
-    public static JDBCConnection getInstance() throws SQLException, IOException {
+    public static JDBCConnection getInstance() throws SQLException, IOException, ClassNotFoundException {
         if (instance == null) {
             synchronized (JDBCConnection.class) {
                 if (instance == null) {
@@ -34,7 +39,8 @@ public final class JDBCConnection implements IManagerConnection<Connection>, ICo
                                                             .senha(props.getProperty("DB_SENHA_JDBC"))
                                                             .drive(props.getProperty("DB_DRIVE_JDBC"))
                                                             .build();
-                    instance = new JDBCConnection(config);
+                    instance = new JDBCConnection(config);  
+                    
                 }
             }
         }
