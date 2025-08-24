@@ -9,7 +9,12 @@ import java.security.InvalidKeyException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mongodb.reactivestreams.client.FindPublisher;
 import com.mongodb.reactivestreams.client.MongoCollection;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public class ConjuntoDadosFilmes  extends AbstractDAOMONGOImpl{
     public ConjuntoDadosFilmes(AvaliacaoJDBCDAOImpl avaliacao)
@@ -20,13 +25,12 @@ public class ConjuntoDadosFilmes  extends AbstractDAOMONGOImpl{
         return super.avaliacao.obterPrimeirosCincoRankingGlobal();
     }
    
-    public List<Document> obterPrimeirosCincoRankingGlobalMongo() throws PersistenciaDawException {
+    public List<Document> converterEstruturaMongo() throws PersistenciaDawException {
         List<Avaliacao> avaliacoes = obterPrimeirosCincoRankingGlobal();
         List<Document> documentos = new ArrayList<>();
 
         for (Avaliacao a : avaliacoes) {
             Filme f = a.getFilme();
-
             Document docFilme = new Document()
                     .append("id", f.getId())
                     .append("titulo", f.getTitulo())
@@ -41,16 +45,26 @@ public class ConjuntoDadosFilmes  extends AbstractDAOMONGOImpl{
 
             documentos.add(docAvaliacao);
         }
-
         return documentos;
     }
 
     public void persistirMongo() throws PersistenciaDawException {
-        List<Document> documentos = obterPrimeirosCincoRankingGlobalMongo();
+        List<Document> documentos = this.converterEstruturaMongo();
         MongoCollection<Document> collection = super.mongoDatabase.getCollection("ranking_filmes");
 
         if (!documentos.isEmpty()) {
             collection.insertMany(documentos);
         }
+    }
+
+    public Flux<Document> obterPrimeirosCincoRankingGlobalMongo() {
+        MongoCollection<Document> collection = super.mongoDatabase.getCollection("ranking_filmes");
+        FindPublisher<Document> publisher = collection.find();
+        return Flux.from(publisher);
+    }
+
+    public Mono<List<Document>> exibirRanking(){
+        Flux<Document> rankingFlux = this.obterPrimeirosCincoRankingGlobalMongo();
+        return rankingFlux.collectList();
     }
 }

@@ -18,7 +18,7 @@ public class MongoDBConnection implements IManagerConnection<MongoClient>, IConn
     private String nomeDataBase;
     private MongoDatabase database;
 
-    
+        
     private ServerApi inicieServerApi(){
         return ServerApi.builder()
         .version(ServerApiVersion.V1)
